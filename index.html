@@ -6,140 +6,156 @@
     <title>CarsAroundTheWorld | Luxury Dealer</title>
     <style>
         :root {
-            --accent: #ffffff;
-            --bg: #000000;
+            --gold: #d4af37;
+            --dark-bg: #050505;
             --card-bg: #111111;
-            --border: #222222;
-            --text-gray: #888888;
+            --text-gold: #c5a059;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg);
+            background-color: var(--dark-bg);
             color: #ffffff;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Georgia', serif; /* Font più elegante e classico */
+            overflow-x: hidden;
         }
 
-        /* Navbar */
+        /* Navbar elegante */
         nav {
-            padding: 30px 5%;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 40px 5%;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            background: var(--dark-bg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo {
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: none; /* Mantiene CarsAroundTheWorld */
         }
 
-        .logo span { color: var(--text-gray); font-weight: 400; }
+        .logo span { color: var(--gold); }
 
-        /* Hero / Story */
-        .header-section {
-            padding: 80px 5% 40px 5%;
-            max-width: 900px;
+        /* Hero & Story */
+        .hero {
+            padding: 100px 10%;
+            text-align: center;
+            background: linear-gradient(to bottom, #050505, #111111);
         }
 
-        .header-section h1 {
-            font-size: 3.5rem;
-            line-height: 1;
-            margin-bottom: 25px;
-            letter-spacing: -2px;
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            font-style: italic;
+            font-weight: 200;
         }
 
-        .story-text {
+        .story-box {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .story-box p {
             font-size: 1.1rem;
-            color: var(--text-gray);
-            line-height: 1.6;
-            margin-bottom: 40px;
-            border-left: 2px solid var(--border);
-            padding-left: 25px;
+            line-height: 1.8;
+            color: #ccc;
+            font-family: 'Arial', sans-serif;
         }
 
-        /* Main Content */
+        /* Container & Grid */
         .container {
-            padding: 0 5% 100px 5%;
+            padding: 80px 8%;
         }
 
-        .controls {
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        .section-header {
+            margin-bottom: 60px;
+            text-align: center;
         }
 
-        .btn-back {
-            display: none;
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            font-weight: 600;
-            cursor: pointer;
+        .view-label {
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: var(--gold);
             font-size: 0.9rem;
         }
 
-        .view-title {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-gray);
-        }
-
-        /* Grid System */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-        .item-card {
+        /* Animazione di comparsa al caricamento/scorrimento */
+        .card {
             background: var(--card-bg);
-            border: 1px solid var(--border);
-            padding: 30px 20px;
-            transition: all 0.2s ease;
+            padding: 50px 30px;
+            text-align: center;
+            border: 1px solid #222;
+            transition: all 0.5s ease;
             cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 120px;
+            opacity: 0; /* Inizia invisibile per l'animazione */
+            transform: translateY(30px);
         }
 
-        .item-card:hover {
-            background: #fff;
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .item-card:hover h3, .item-card:hover p {
+        .card:hover {
+            border-color: var(--gold);
+            background: #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .card span {
+            font-family: 'Arial', sans-serif;
+            font-size: 0.7rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Bottone Indietro */
+        .btn-back {
+            display: none;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 10px 30px;
+            cursor: pointer;
+            margin-bottom: 40px;
+            font-family: 'Arial', sans-serif;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: var(--gold);
             color: #000;
         }
 
-        .item-card h3 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
-
-        .item-card p {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         footer {
-            padding: 50px 5%;
-            border-top: 1px solid var(--border);
+            padding: 60px;
+            text-align: center;
+            border-top: 1px solid #222;
+            color: #555;
             font-size: 0.8rem;
-            color: var(--text-gray);
-        }
-
-        @media (max-width: 768px) {
-            .header-section h1 { font-size: 2.5rem; }
+            letter-spacing: 2px;
         }
     </style>
 </head>
@@ -149,27 +165,29 @@
     <div class="logo">CarsAroundTheWorld<span>.com</span></div>
 </nav>
 
-<div class="header-section">
-    <h1>Selezione Automobilistica Internazionale.</h1>
-    <p class="story-text">
-        CarsAroundTheWorld rappresenta l'eccellenza nel settore dei veicoli d'élite. 
-        La nostra storia affonda le radici nella ricerca costante del dettaglio, 
-        curando una collezione che spazia dai classici intramontabili alle ultime 
-        innovazioni tecnologiche. Ogni modello è una garanzia di prestigio.
-    </p>
+<div class="hero">
+    <h1>L'eccellenza non scende a compromessi.</h1>
+    <div class="story-box">
+        <p>
+            Da oltre due decenni, **CarsAroundTheWorld** ridefinisce il concetto di mobilità di lusso. 
+            Nata da una collezione privata, la nostra concessionaria è diventata il punto d'incontro 
+            per chi non cerca solo un'auto, ma un capolavoro di ingegneria. 
+            Esplora la nostra selezione esclusiva, curata dai migliori esperti del settore.
+        </p>
+    </div>
 </div>
 
 <div class="container">
-    <div class="controls">
-        <button class="btn-back" id="backBtn" onclick="showBrands()">Torna ai Marchi</button>
-        <span class="view-title" id="viewLabel">Marchi Disponibili</span>
+    <div class="section-header">
+        <button class="btn-back" id="backBtn" onclick="showBrands()">← Indietro</button>
+        <p class="view-label" id="viewLabel">Catalogo Marchi</p>
     </div>
 
     <div id="mainGrid" class="grid"></div>
 </div>
 
 <footer>
-    &copy; 2026 CarsAroundTheWorld.com — Tutti i diritti riservati.
+    &copy; 2026 CarsAroundTheWorld.com — International Luxury Dealer
 </footer>
 
 <script>
@@ -210,38 +228,56 @@ const grid = document.getElementById('mainGrid');
 const backBtn = document.getElementById('backBtn');
 const viewLabel = document.getElementById('viewLabel');
 
+// Funzione per l'animazione allo scorrimento
+function animateOnScroll() {
+    const cards = document.querySelectorAll('.card');
+    cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < window.innerHeight - 50) {
+            card.classList.add('visible');
+        }
+    });
+}
+
+window.addEventListener('scroll', animateOnScroll);
+
 function showBrands() {
     grid.innerHTML = '';
-    viewLabel.textContent = "Marchi Disponibili";
+    viewLabel.textContent = "Catalogo Marchi";
     backBtn.style.display = 'none';
 
     Object.keys(carData).sort().forEach(brand => {
         const card = document.createElement('div');
-        card.className = 'item-card';
+        card.className = 'card';
         card.innerHTML = `
-            <p>Manufacturer</p>
+            <span>Automotive Brand</span>
             <h3>${brand}</h3>
         `;
         card.onclick = () => showCars(brand);
         grid.appendChild(card);
     });
+    
+    // Attiva animazione iniziale
+    setTimeout(animateOnScroll, 100);
 }
 
 function showCars(brand) {
     grid.innerHTML = '';
-    viewLabel.textContent = "Modelli / " + brand;
-    backBtn.style.display = 'block';
+    viewLabel.textContent = "Modelli " + brand;
+    backBtn.style.display = 'inline-block';
 
     carData[brand].sort().forEach(model => {
         const card = document.createElement('div');
-        card.className = 'item-card';
+        card.className = 'card';
         card.innerHTML = `
-            <p>${brand}</p>
+            <span>${brand} Series</span>
             <h3>${model}</h3>
         `;
         grid.appendChild(card);
     });
-    window.scrollTo({top: 400, behavior: 'smooth'});
+    
+    setTimeout(animateOnScroll, 100);
+    window.scrollTo({top: 500, behavior: 'smooth'});
 }
 
 showBrands();
