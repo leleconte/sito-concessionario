@@ -3,165 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cars Around The World | Luxury Dealer</title>
+    <title>Cars Around The World | Official Dealer</title>
     <style>
         :root {
-            --gold: #c5a059;
-            --dark-bg: #0a0a0a;
-            --card-bg: #161616;
-            --text-main: #ffffff;
-            --text-dim: #a0a0a0;
+            --accent: #d4af37; /* Oro Luxury */
+            --bg: #050505;
+            --surface: #121212;
+            --surface-light: #1e1e1e;
+            --text: #e0e0e0;
+            --text-muted: #888;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark-bg);
-            color: var(--text-main);
-            scroll-behavior: smooth;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
+        /* Navigazione */
         nav {
-            background: rgba(0,0,0,0.9);
-            padding: 20px 50px;
-            display: flex;
-            justify-content: center;
-            border-bottom: 1px solid #333;
-            position: sticky;
+            padding: 25px 5%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            position: fixed;
+            width: 100%;
             top: 0;
             z-index: 1000;
+            display: flex;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            letter-spacing: 3px;
-            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: var(--accent);
             text-transform: uppercase;
         }
 
+        /* Hero */
         .hero {
-            height: 40vh;
-            background: linear-gradient(rgba(0,0,0,0.8), rgba(10,10,10,1)), 
-                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
-            background-size: cover;
-            background-position: center;
+            height: 70vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
             text-align: center;
+            padding-top: 100px;
         }
 
-        .story-section {
-            padding: 40px 10%;
-            background: var(--card-bg);
+        .hero h1 {
+            font-size: clamp(2rem, 8vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff 30%, #666 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .hero p { color: var(--accent); letter-spacing: 4px; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* Story */
+        .story {
+            padding: 100px 10%;
             text-align: center;
-            border-bottom: 1px solid #222;
+            background: var(--surface);
+            border-top: 1px solid #222;
         }
 
-        .story-section p { color: var(--text-dim); max-width: 800px; margin: 0 auto; line-height: 1.6; }
+        .story h2 { color: var(--accent); margin-bottom: 30px; font-weight: 300; letter-spacing: 2px; }
+        .story p { max-width: 900px; margin: 0 auto; color: var(--text-muted); font-size: 1.1rem; }
 
-        .container {
-            padding: 40px 5%;
-            max-width: 1400px;
-            margin: auto;
-            min-height: 600px;
+        /* Container */
+        .main-content {
+            padding: 80px 5%;
+            min-height: 100vh;
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 2rem;
-            text-transform: uppercase;
-            color: var(--gold);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid #222;
-            padding: 0;
-            text-align: center;
-            transition: 0.3s;
-            cursor: pointer;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-        }
-
-        .brand-card { padding: 40px 20px; }
-
-        .car-img-container {
-            width: 100%;
-            height: 180px;
-            background: #000;
+        .section-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            margin-bottom: 50px;
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
         }
-
-        .car-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.5s;
-        }
-
-        .card:hover img { transform: scale(1.1); }
-
-        .car-info { padding: 15px; }
 
         .btn-back {
             display: none;
-            background: var(--gold);
-            color: black;
-            border: none;
-            padding: 12px 24px;
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 10px 25px;
             cursor: pointer;
             font-weight: bold;
-            margin-bottom: 30px;
-            border-radius: 4px;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.8rem;
         }
 
+        .btn-back:hover { background: var(--accent); color: black; }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        /* Card */
+        .card {
+            background: var(--surface);
+            border: 1px solid #222;
+            border-radius: 0; /* Squadrato per lusso */
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.8s;
+            opacity: 0.8;
+        }
+
+        .card:hover img { transform: scale(1.1); opacity: 1; }
+
+        .card-body { padding: 25px; text-align: left; }
+        .card-body h3 { font-weight: 700; font-size: 1.2rem; margin-bottom: 5px; }
+        .card-body span { color: var(--accent); font-size: 0.75rem; letter-spacing: 2px; }
+
         footer {
-            padding: 30px;
+            padding: 60px;
             text-align: center;
-            color: #444;
             border-top: 1px solid #222;
+            background: #000;
+            color: #444;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
-<nav><div class="logo">Cars Around The World</div></nav>
+<nav><div class="logo">CARSAROUNDTHEWORLD.COM</div></nav>
 
 <div class="hero">
-    <h1>Elite Automotive Group</h1>
-    <p>La tua destinazione per il lusso su strada.</p>
+    <p>Premium Vehicle Collection</p>
+    <h1>The Art of Driving</h1>
 </div>
 
-<section class="story-section">
-    <p><i>"Dal 1998, selezioniamo solo il meglio dell'ingegneria mondiale. Ogni nostra auto è un pezzo di storia."</i></p>
+<section class="story">
+    <h2>Eredità e Potenza</h2>
+    <p>Dal cuore della metropoli alle strade panoramiche, CarsAroundTheWorld.com seleziona l'eccellenza. Non vendiamo semplici veicoli, ma estensioni della vostra personalità. Ogni brand nel nostro catalogo rappresenta un vertice dell'ingegneria e del design mondiale.</p>
 </section>
 
-<div class="container">
-    <button class="btn-back" id="backBtn" onclick="showBrands()">← TORNA AI MARCHI</button>
-    <h2 class="section-title" id="mainTitle">I Nostri Marchi</h2>
+<main class="main-content">
+    <div class="section-header">
+        <h2 id="viewTitle">MARCHI DISPONIBILI</h2>
+        <button class="btn-back" id="backBtn" onclick="showBrands()">← Indietro</button>
+    </div>
+    
     <div id="displayGrid" class="grid"></div>
-</div>
+</main>
 
-<footer>&copy; 2026 Cars Around The World</footer>
+<footer>&copy; 2026 CARSAROUNDTHEWORLD.COM</footer>
 
 <script>
 const carData = {
@@ -198,18 +228,26 @@ const carData = {
 };
 
 const grid = document.getElementById('displayGrid');
-const mainTitle = document.getElementById('mainTitle');
+const viewTitle = document.getElementById('viewTitle');
 const backBtn = document.getElementById('backBtn');
 
 function showBrands() {
     grid.innerHTML = '';
-    mainTitle.textContent = "I Nostri Marchi";
+    viewTitle.textContent = "MARCHI DISPONIBILI";
     backBtn.style.display = 'none';
 
     Object.keys(carData).sort().forEach(brand => {
         const card = document.createElement('div');
-        card.className = 'card brand-card';
-        card.innerHTML = `<h3>${brand}</h3><p style="color:var(--gold)">Esplora modelli</p>`;
+        card.className = 'card';
+        card.innerHTML = `
+            <div class="card-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=600" alt="${brand}">
+            </div>
+            <div class="card-body">
+                <span>BRAND UFFICIALE</span>
+                <h3>${brand.toUpperCase()}</h3>
+            </div>
+        `;
         card.onclick = () => showCars(brand);
         grid.appendChild(card);
     });
@@ -217,36 +255,36 @@ function showBrands() {
 
 function showCars(brand) {
     grid.innerHTML = '';
-    mainTitle.textContent = brand;
-    backBtn.style.display = 'inline-block';
+    viewTitle.textContent = brand.toUpperCase();
+    backBtn.style.display = 'block';
 
     carData[brand].forEach(model => {
         const card = document.createElement('div');
         card.className = 'card';
         
-        // Generazione automatica URL immagine (Tentativo su Wiki GTA)
-        // Formattiamo il nome per la ricerca (es: "Elegy RH8" diventa "Elegy_RH8")
-        const formattedModel = model.replace(/\s+/g, '_');
-        const imgUrl = `https://www.gtabase.com/images/gta-5/vehicles/main/${model.toLowerCase().replace(/\s+/g, '-')}.jpg`;
-        const fallbackImg = "https://images.unsplash.com/photo-1542362567-b05500269774?auto=format&fit=crop&q=60&w=400";
+        // LOGICA IMMAGINI GTA
+        // Tentativo di caricamento da database iconici di GTA
+        const cleanName = model.toLowerCase().replace(/\s+/g, '');
+        const imgUrl = `https://gta-objects.com/images/vehicles/main/${cleanName}.jpg`;
+        const fallback = `https://www.gtabase.com/images/gta-5/vehicles/main/${model.toLowerCase().replace(/\s+/g, '-')}.jpg`;
 
         card.innerHTML = `
-            <div class="car-img-container">
+            <div class="card-img-wrapper">
                 <img src="${imgUrl}" 
-                     onerror="this.onerror=null;this.src='${fallbackImg}';" 
+                     onerror="this.onerror=null;this.src='${fallback}';this.nextElementSibling.style.display='block';" 
                      alt="${model}">
             </div>
-            <div class="car-info">
+            <div class="card-body">
+                <span>MODELLO DISPONIBILE</span>
                 <h3>${model}</h3>
             </div>
         `;
         grid.appendChild(card);
     });
-    window.scrollTo(0, 300);
+    window.scrollTo({top: 500, behavior: 'smooth'});
 }
 
 showBrands();
 </script>
-
 </body>
 </html>
