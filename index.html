@@ -39,7 +39,7 @@
             background: rgba(0, 0, 0, 0.95);
             padding: 20px 5%;
             display: flex;
-            flex-direction: column; /* Per mobile */
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             position: fixed;
@@ -60,8 +60,10 @@
             letter-spacing: 2px;
             color: #fff;
             cursor: pointer;
-            text-align: center;
+            text-decoration: none;
         }
+
+        .logo-text span { color: var(--gold); }
 
         .nav-links { display: flex; gap: 20px; }
 
@@ -74,7 +76,10 @@
             background: none;
             border: none;
             font-weight: 600;
+            transition: 0.3s;
         }
+
+        .nav-item:hover { color: var(--gold); }
 
         /* Modals */
         .modal {
@@ -112,7 +117,7 @@
             font-size: 0.7rem;
         }
 
-        /* Hero Section - Adattata per Mobile */
+        /* Hero Section */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -125,7 +130,7 @@
 
         .hero-section h1 { 
             font-family: 'Cinzel', serif;
-            font-size: clamp(2.5rem, 10vw, 6rem); /* Si riduce su mobile */
+            font-size: clamp(2.5rem, 10vw, 6rem);
             font-weight: 700; 
             margin-bottom: 10px; 
             background: linear-gradient(to bottom, #fff, #999);
@@ -140,7 +145,7 @@
             font-size: clamp(0.5rem, 2vw, 0.7rem); 
         }
 
-        /* Catalogo Responsivo */
+        /* Catalogo */
         .catalogue-section {
             padding: 150px 5% 60px 5%;
             background: var(--dark);
@@ -149,7 +154,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Più compatto su mobile */
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 15px;
         }
 
@@ -160,7 +165,7 @@
         .card {
             background: #0d0d0d;
             border: 1px solid #1a1a1a;
-            padding: 30px 15px;
+            padding: 40px 15px;
             text-align: center;
             transition: 0.4s;
             cursor: pointer;
@@ -169,15 +174,15 @@
         }
 
         .card.visible { opacity: 1; transform: translateY(0); }
-        .card:hover { border-color: var(--gold); }
+        .card:hover { border-color: var(--gold); background: #111; }
 
-        .card h3 { font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
-        .card span { color: var(--gold); font-size: 0.5rem; letter-spacing: 2px; display: block; margin-bottom: 10px; }
+        .card h3 { font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+        .card span { color: var(--gold); font-size: 0.55rem; letter-spacing: 2px; display: block; margin-bottom: 12px; }
 
         .btn-back {
             background: transparent;
             color: var(--gold);
-            padding: 10px 30px;
+            padding: 12px 35px;
             border: 1px solid var(--gold);
             font-weight: bold;
             cursor: pointer;
@@ -185,9 +190,12 @@
             display: none;
             text-transform: uppercase;
             font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
         }
+        .btn-back:hover { background: var(--gold); color: #000; }
 
-        footer { padding: 40px 20px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 3px; }
+        footer { padding: 60px 20px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 3px; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
@@ -206,7 +214,7 @@
 <div id="modal-storia" class="modal" onclick="closeModals()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <h4>Eredità</h4>
-        <p>CarsAroundTheWorld è la destinazione finale per il collezionista esigente. Una visione nata dalla passione per la perfezione meccanica e il design senza tempo.</p>
+        <p>CarsAroundTheWorld è la destinazione finale per il collezionista esigente. Una visione nata dalla passione per la perfezione meccanica e il design senza tempo. Ogni mezzo nel nostro catalogo è una promessa di eccellenza.</p>
         <button class="close-btn" onclick="closeModals()">Chiudi</button>
     </div>
 </div>
@@ -214,7 +222,7 @@
 <div id="modal-sede" class="modal" onclick="closeModals()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <h4>Showroom</h4>
-        <p>Visita lo showroom privato di <strong>Simeon Yetarian</strong>.<br>Situato tra Power St. e Adam's Apple Blvd, Pillbox Hill.</p>
+        <p>Visita lo showroom privato di <strong>Simeon Yetarian</strong>.<br>Situato tra Power St. e Adam's Apple Blvd, Pillbox Hill.<br>Il cuore del lusso a Los Santos.</p>
         <button class="close-btn" onclick="closeModals()">Chiudi</button>
     </div>
 </div>
@@ -229,7 +237,7 @@
 
 <div class="hero-section">
     <h1>AVANT-GARDE.</h1>
-    <p>Esperienza curata nei dettagli</p>
+    <p>Esperienza curata nei minimi dettagli</p>
     <div style="margin-top: 40px; font-size: 0.6rem; opacity: 0.4; letter-spacing: 4px;">SCORRI PER IL CATALOGO</div>
 </div>
 
@@ -243,37 +251,41 @@
 <footer>CARSAROUNDTHEWORLD.COM — © 2026</footer>
 
 <script>
+// Database Completo con Auto e Moto (Escluse Oppressor/Shotaro)
 const carData = {
     Albany: ["Buccaneer","Emperor","Hermes","Manana","Primo"],
-    Annis: ["Elegy RH8","Elegy Retro","Savestra"],
-    Benefactor: ["Schafter","Stirling GT","Feltzer","Dubsta"],
-    BF: ["Bifta","Injection"],
-    Bravado: ["Banshee","Buffalo","Gauntlet"],
-    Canis: ["Bodhi","Freecrawler"],
+    Annis: ["Elegy RH8","Elegy Retro","Savestra","RE-7B"],
+    Benefactor: ["Schafter","Stirling GT","Feltzer","Dubsta","Krieger"],
+    BF: ["Bifta","Injection","Club"],
+    Bravado: ["Banshee","Buffalo STX","Gauntlet Hellfire"],
+    Canis: ["Bodhi","Freecrawler","Kamacho"],
     Cheval: ["Picador","Taipan"],
-    Declasse: ["Sabre Turbo","Voodoo","Impaler"],
-    Dewbauchee: ["Rapid GT","Specter","Massacro"],
-    Dinka: ["Blista","Jester","Sugoi"],
-    Enus: ["Cognoscenti","Paragon R","Windsor"],
-    Gallivanter: ["Baller"],
-    Grotti: ["Cheetah","Turismo R","Furia","Itali RSX"],
-    Imponte: ["Phoenix","Duke O'Death"],
+    Declasse: ["Sabre Turbo","Voodoo","Impaler","Vigero ZX"],
+    Dewbauchee: ["Rapid GT","Specter","Massacro","Vagner"],
+    Dinka: ["Akuma (Moto)","Blista Compact","Jester RR","Sugoi","Vindicator (Moto)"],
+    Enus: ["Cognoscenti","Paragon R","Windsor Drop","Deity"],
+    Gallivanter: ["Baller ST","Baller LE"],
+    Grotti: ["Cheetah Classic","Turismo R","Furia","Itali RSX","Stinger TT"],
+    Imponte: ["Phoenix","Duke O'Death","Beater Dukes"],
     Invetero: ["Coquette","Coquette D10"],
-    Karin: ["Futo","Sultan","BeeJay XL"],
-    Lampadati: ["Casco","Michelli GT"],
-    Maibatsu: ["Penumbra"],
-    Obey: ["9F","Tailgater","Omnis"],
-    Ocelot: ["Jackal","Pariah","XA-21"],
-    Overflod: ["Entity XF","Autarch"],
-    Pegassi: ["Infernus","Zentorno","Osiris","Tempesta"],
-    Pfister: ["Comet","Neon","Growler"],
-    Progen: ["T20","Emerus"],
-    Truffade: ["Adder","Thrax"],
-    Übermacht: ["Sentinel","Rebla GTS","Zion"],
-    Vapid: ["Dominator","Flash GT","Ellie"],
-    Vulcar: ["Warrener"],
-    Weeny: ["Issi"],
-    Western: ["Daemon","Zombie"]
+    Karin: ["Futo GTX","Sultan RS","BeeJay XL","Calico GTF"],
+    Lampadati: ["Casco","Michelli GT","Corsita","Viseris"],
+    LCC: ["Innovation (Moto)","Avarus (Moto)","Sanctus (Moto)"],
+    Maibatsu: ["Penumbra FF","Manchez (Moto)"],
+    Nagasaki: ["Carbon RS (Moto)","Chimera (Moto)","BF400 (Moto)","Shinobi (Moto)"],
+    Obey: ["9F","Tailgater S","Omnis e-GT","10F"],
+    Ocelot: ["Jackal","Pariah","XA-21","Jugular"],
+    Overflod: ["Entity MT","Autarch","Tyrant"],
+    Pegassi: ["Bati 801 (Moto)","Infernus","Zentorno","Osiris","Tempesta","FCR 1000 (Moto)"],
+    Pfister: ["Comet S2","Neon","Growler","811"],
+    Progen: ["T20","Emerus","GP1"],
+    Shitzu: ["Hakuchou (Moto)","PCJ 600 (Moto)","Vader (Moto)"],
+    Truffade: ["Adder","Thrax","Nero Custom"],
+    Übermacht: ["Sentinel Classic","Rebla GTS","Zion","Cypher"],
+    Vapid: ["Dominator ASP","Flash GT","Ellie","Sandking XL"],
+    Vulcar: ["Warrener","Nebula Turbo"],
+    Weeny: ["Issi Rally","Issi Classic"],
+    Western: ["Bagger (Moto)","Gargoyle (Moto)","Nightblade (Moto)","Wolfsbane (Moto)","Reever (Moto)"]
 };
 
 function openModal(id) { document.getElementById('modal-' + id).style.display = 'flex'; }
@@ -297,7 +309,7 @@ function showBrands() {
     Object.keys(carData).sort().forEach(brand => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<span>MARCHIO</span><h3>${brand}</h3>`;
+        card.innerHTML = `<span>MANIFATTURA</span><h3>${brand}</h3>`;
         card.onclick = () => showCars(brand);
         grid.appendChild(card);
     });
@@ -307,7 +319,7 @@ function showBrands() {
 function showCars(brand) {
     grid.innerHTML = '';
     backBtn.style.display = 'inline-block';
-    carData[brand].forEach(model => {
+    carData[brand].sort().forEach(model => {
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `<span>${brand.toUpperCase()}</span><h3>${model}</h3>`;
