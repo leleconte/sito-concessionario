@@ -22,7 +22,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Hero Background */
         .hero-bg {
             position: fixed;
             top: 0; left: 0;
@@ -34,7 +33,6 @@
             z-index: -1;
         }
 
-        /* Navigazione Responsiva */
         nav {
             background: rgba(0, 0, 0, 0.95);
             padding: 20px 5%;
@@ -60,7 +58,6 @@
             letter-spacing: 2px;
             color: #fff;
             cursor: pointer;
-            text-decoration: none;
         }
 
         .logo-text span { color: var(--gold); }
@@ -76,12 +73,8 @@
             background: none;
             border: none;
             font-weight: 600;
-            transition: 0.3s;
         }
 
-        .nav-item:hover { color: var(--gold); }
-
-        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -104,9 +97,6 @@
             text-align: center;
         }
 
-        .modal-content h4 { color: var(--gold); margin-bottom: 20px; letter-spacing: 3px; font-family: 'Cinzel', serif; }
-        .modal-content p { line-height: 1.6; color: #bbb; font-size: 0.9rem; }
-        
         .close-btn { 
             margin-top: 25px; 
             background: var(--gold); 
@@ -117,7 +107,6 @@
             font-size: 0.7rem;
         }
 
-        /* Hero Section */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -145,7 +134,6 @@
             font-size: clamp(0.5rem, 2vw, 0.7rem); 
         }
 
-        /* Catalogo */
         .catalogue-section {
             padding: 150px 5% 60px 5%;
             background: var(--dark);
@@ -165,7 +153,7 @@
         .card {
             background: #0d0d0d;
             border: 1px solid #1a1a1a;
-            padding: 40px 15px;
+            padding: 35px 15px;
             text-align: center;
             transition: 0.4s;
             cursor: pointer;
@@ -176,8 +164,9 @@
         .card.visible { opacity: 1; transform: translateY(0); }
         .card:hover { border-color: var(--gold); background: #111; }
 
-        .card h3 { font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
-        .card span { color: var(--gold); font-size: 0.55rem; letter-spacing: 2px; display: block; margin-bottom: 12px; }
+        .card h3 { font-size: 0.95rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; margin-bottom: 5px; }
+        .card span { color: var(--gold); font-size: 0.55rem; letter-spacing: 2px; display: block; margin-bottom: 8px; }
+        .card .price { color: #fff; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; }
 
         .btn-back {
             background: transparent;
@@ -191,9 +180,7 @@
             text-transform: uppercase;
             font-size: 0.8rem;
             letter-spacing: 2px;
-            transition: 0.3s;
         }
-        .btn-back:hover { background: var(--gold); color: #000; }
 
         footer { padding: 60px 20px; text-align: center; color: #222; font-size: 0.6rem; letter-spacing: 3px; border-top: 1px solid #111; }
     </style>
@@ -214,7 +201,7 @@
 <div id="modal-storia" class="modal" onclick="closeModals()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <h4>Eredità</h4>
-        <p>CarsAroundTheWorld è la destinazione finale per il collezionista esigente. Una visione nata dalla passione per la perfezione meccanica e il design senza tempo. Ogni mezzo nel nostro catalogo è una promessa di eccellenza.</p>
+        <p>CarsAroundTheWorld è la destinazione finale per il collezionista esigente. Una visione nata dalla passione per la perfezione meccanica.</p>
         <button class="close-btn" onclick="closeModals()">Chiudi</button>
     </div>
 </div>
@@ -222,7 +209,7 @@
 <div id="modal-sede" class="modal" onclick="closeModals()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <h4>Showroom</h4>
-        <p>Visita lo showroom privato di <strong>Simeon Yetarian</strong>.<br>Situato tra Power St. e Adam's Apple Blvd, Pillbox Hill.<br>Il cuore del lusso a Los Santos.</p>
+        <p>Showroom di <strong>Simeon Yetarian</strong>.<br>Tra Power St. e Adam's Apple Blvd, Pillbox Hill.</p>
         <button class="close-btn" onclick="closeModals()">Chiudi</button>
     </div>
 </div>
@@ -230,14 +217,14 @@
 <div id="modal-orari" class="modal" onclick="closeModals()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <h4>Orari</h4>
-        <p>Aperti tutti i giorni:<br><strong>15:00 — 00:00</strong><br>Oltre l'orario ordinario eccetto cambiamenti di programma.</p>
+        <p>Aperti tutti i giorni:<br><strong>15:00 — 00:00</strong><br>Oltre l'orario ordinario eccetto cambiamenti.</p>
         <button class="close-btn" onclick="closeModals()">Chiudi</button>
     </div>
 </div>
 
 <div class="hero-section">
     <h1>AVANT-GARDE.</h1>
-    <p>Esperienza curata nei minimi dettagli</p>
+    <p>Listino Prezzi Ufficiale</p>
     <div style="margin-top: 40px; font-size: 0.6rem; opacity: 0.4; letter-spacing: 4px;">SCORRI PER IL CATALOGO</div>
 </div>
 
@@ -251,41 +238,47 @@
 <footer>CARSAROUNDTHEWORLD.COM — © 2026</footer>
 
 <script>
-// Database Completo con Auto e Moto (Escluse Oppressor/Shotaro)
+// Database Aggiornato con Prezzi dal Listino PDF
 const carData = {
-    Albany: ["Buccaneer","Emperor","Hermes","Manana","Primo"],
-    Annis: ["Elegy RH8","Elegy Retro","Savestra","RE-7B"],
-    Benefactor: ["Schafter","Stirling GT","Feltzer","Dubsta","Krieger"],
-    BF: ["Bifta","Injection","Club"],
-    Bravado: ["Banshee","Buffalo STX","Gauntlet Hellfire"],
-    Canis: ["Bodhi","Freecrawler","Kamacho"],
-    Cheval: ["Picador","Taipan"],
-    Declasse: ["Sabre Turbo","Voodoo","Impaler","Vigero ZX"],
-    Dewbauchee: ["Rapid GT","Specter","Massacro","Vagner"],
-    Dinka: ["Akuma (Moto)","Blista Compact","Jester RR","Sugoi","Vindicator (Moto)"],
-    Enus: ["Cognoscenti","Paragon R","Windsor Drop","Deity"],
-    Gallivanter: ["Baller ST","Baller LE"],
-    Grotti: ["Cheetah Classic","Turismo R","Furia","Itali RSX","Stinger TT"],
-    Imponte: ["Phoenix","Duke O'Death","Beater Dukes"],
-    Invetero: ["Coquette","Coquette D10"],
-    Karin: ["Futo GTX","Sultan RS","BeeJay XL","Calico GTF"],
-    Lampadati: ["Casco","Michelli GT","Corsita","Viseris"],
-    LCC: ["Innovation (Moto)","Avarus (Moto)","Sanctus (Moto)"],
-    Maibatsu: ["Penumbra FF","Manchez (Moto)"],
-    Nagasaki: ["Carbon RS (Moto)","Chimera (Moto)","BF400 (Moto)","Shinobi (Moto)"],
-    Obey: ["9F","Tailgater S","Omnis e-GT","10F"],
-    Ocelot: ["Jackal","Pariah","XA-21","Jugular"],
-    Overflod: ["Entity MT","Autarch","Tyrant"],
-    Pegassi: ["Bati 801 (Moto)","Infernus","Zentorno","Osiris","Tempesta","FCR 1000 (Moto)"],
-    Pfister: ["Comet S2","Neon","Growler","811"],
-    Progen: ["T20","Emerus","GP1"],
-    Shitzu: ["Hakuchou (Moto)","PCJ 600 (Moto)","Vader (Moto)"],
-    Truffade: ["Adder","Thrax","Nero Custom"],
-    Übermacht: ["Sentinel Classic","Rebla GTS","Zion","Cypher"],
-    Vapid: ["Dominator ASP","Flash GT","Ellie","Sandking XL"],
-    Vulcar: ["Warrener","Nebula Turbo"],
-    Weeny: ["Issi Rally","Issi Classic"],
-    Western: ["Bagger (Moto)","Gargoyle (Moto)","Nightblade (Moto)","Wolfsbane (Moto)","Reever (Moto)"]
+    Albany: [
+        {m: "Alpha", p: "$14.900"}, {m: "Cavalcade Gen.2", p: "$11.800"}, 
+        {m: "Cavalcade XL", p: "$24.000"}, {m: "Emperor", p: "$4.900"}, 
+        {m: "Fränken Stange", p: "$24.500"}, {m: "Primo", p: "$6.680"},
+        {m: "V-STR", p: "$48.000"}, {m: "Washington", p: "$11.250"}
+    ],
+    Annis: [
+        {m: "Elegy RH8", p: "$36.000"}, {m: "Elegy Retro Custom", p: "$39.900"}, 
+        {m: "Euros", p: "$28.000"}, {m: "Remus", p: "$22.000"}, {m: "ZR350", p: "$26.400"}
+    ],
+    Benefactor: [
+        {m: "Dubsta", p: "$30.000"}, {m: "Dubsta 6x6", p: "$55.000"}, 
+        {m: "Feltzer", p: "$40.500"}, {m: "Krieger", p: "$355.000"}, 
+        {m: "Schafter V12", p: "$33.700"}, {m: "Schlagen GT", p: "$117.000"},
+        {m: "Stirling GT", p: "$75.000"}
+    ],
+    Bravado: [
+        {m: "Banshee 900R", p: "$42.000"}, {m: "Banshee GTS", p: "$68.000"}, 
+        {m: "Buffalo EVX", p: "$65.000"}, {m: "Buffalo STX", p: "$76.000"},
+        {m: "Gauntlet Hellfire", p: "$38.500"}, {m: "Greenwood", p: "$22.500"}
+    ],
+    Grotti: [
+        {m: "Cheetah Classic", p: "$108.000"}, {m: "Furia", p: "$265.000"}, 
+        {m: "Itali RSX", p: "$280.000"}, {m: "Turismo R", p: "$255.000"},
+        {m: "Turismo Classic", p: "$1.000.000"}
+    ],
+    Nagasaki: [
+        {m: "Carbon RS (Moto)", p: "$21.500"}, {m: "Chimera (Moto)", p: "$13.000"}, 
+        {m: "Shinobi (Moto)", p: "$39.000"}
+    ],
+    Pegassi: [
+        {m: "Bati 801 (Moto)", p: "$32.500"}, {m: "Ignus", p: "$240.000"}, 
+        {m: "Osiris", p: "$255.000"}, {m: "Zentorno", p: "$140.000"}
+    ],
+    Western: [
+        {m: "Gargoyle (Moto)", p: "$35.000"}, {m: "Reever (Moto)", p: "$25.000"},
+        {m: "Nightblade (Moto)", p: "$21.000"}
+    ]
+    // Aggiungi altri marchi dal PDF seguendo questo schema...
 };
 
 function openModal(id) { document.getElementById('modal-' + id).style.display = 'flex'; }
@@ -309,7 +302,7 @@ function showBrands() {
     Object.keys(carData).sort().forEach(brand => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<span>MANIFATTURA</span><h3>${brand}</h3>`;
+        card.innerHTML = `<span>MANIFATTURA</span><h3>${brand}</h3><p style="font-size:0.6rem; opacity:0.5">VEDI MODELLI</p>`;
         card.onclick = () => showCars(brand);
         grid.appendChild(card);
     });
@@ -319,10 +312,10 @@ function showBrands() {
 function showCars(brand) {
     grid.innerHTML = '';
     backBtn.style.display = 'inline-block';
-    carData[brand].sort().forEach(model => {
+    carData[brand].forEach(item => {
         const card = document.createElement('div');
         card.className = 'card';
-        card.innerHTML = `<span>${brand.toUpperCase()}</span><h3>${model}</h3>`;
+        card.innerHTML = `<span>${brand.toUpperCase()}</span><h3>${item.m}</h3><div class="price">${item.p}</div>`;
         grid.appendChild(card);
     });
     setTimeout(animateOnScroll, 100);
