@@ -210,7 +210,7 @@
 <div id="sideMenu" class="side-menu">
     <p onclick="toggleMenu()" style="color:var(--gold); cursor:pointer; font-size:0.7rem; letter-spacing:2px; margin-bottom: 30px;">← CHIUDI</p>
     <ul class="menu-list">
-        <li class="clickable" onclick="openPreventivo()">✨RICHIESTA PREVENTIVO</li>
+        <li class="clickable" onclick="openPreventivo()">✨ PREVENTIVO IMPORT</li>
         <li style="color: var(--gold); margin-top: 20px; border-bottom: 1px solid #222; padding-bottom: 10px;">ESPLORA MARCHI</li>
         <div id="brandMenuList"></div>
     </ul>
@@ -231,7 +231,7 @@
             <div class="form-group"><label>MODELLO VEICOLO</label><input type="text" id="imp-model" class="form-input" placeholder="es. Itali RSX"></div>
         </div>
 
-        <button class="btn-gold" onclick="sendToDiscord()">Invia Informazioni al team specializzato🚘</button>
+        <button class="btn-gold" onclick="sendToDiscord()">Invia Informazioni a Simeon</button>
         <p onclick="closePreventivo()" style="margin-top:20px; cursor:pointer; font-size:0.6rem; opacity:0.5; letter-spacing:2px">ANNULLA</p>
     </div>
 </div>
@@ -323,7 +323,7 @@ async function sendToDiscord() {
 
     const payload = {
         embeds: [{
-            title: "💎 NUOVA RICHIESTA DI PREVENTIVO",
+            title: "💎 NUOVA RICHIESTA DI CONSULENZA IMPORT",
             color: 13938487,
             fields: [
                 { name: "👤 Cliente", value: name, inline: true },
@@ -340,7 +340,7 @@ async function sendToDiscord() {
     try {
         const res = await fetch(webhook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
         if(res.ok) {
-            alert("Informazioni inviate! Il team visionerà i tuoi dati e ti contatterà presto per fissare l'incontro conoscitivo.");
+            alert("Informazioni inviate! Simeon visionerà i tuoi dati e ti contatterà presto per fissare l'incontro conoscitivo.");
             closePreventivo();
         } else { alert("Errore del server. Riprova."); }
     } catch(e) { alert("Errore di connessione."); }
