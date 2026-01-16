@@ -12,8 +12,7 @@
             --overlay: rgba(0, 0, 0, 0.85);
         }
 
-        /* Reset e Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--dark);
@@ -21,195 +20,219 @@
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            line-height: 1.5;
         }
 
-        /* Background fisso per performance mobile */
+        /* Hero Background */
         .hero-bg {
             position: fixed;
             top: 0; left: 0;
-            width: 100%; height: 100%;
+            width: 100%; height: 100vh;
             background: linear-gradient(var(--overlay), var(--dark)), 
-                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1200');
+                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
             background-size: cover;
             background-position: center;
             z-index: -1;
         }
 
-        /* Navigazione Mobile-Responsive */
+        /* Navigazione */
         nav {
-            background: rgba(0, 0, 0, 0.98);
-            padding: 10px 15px;
-            display: flex;
-            flex-direction: column; /* Stack su mobile per dare spazio alla ricerca */
-            gap: 10px;
-            position: fixed;
-            width: 100%; top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-        }
-
-        .nav-top {
+            background: rgba(0, 0, 0, 0.95);
+            padding: 0 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            position: fixed;
+            width: 100%; top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            height: 80px;
         }
+
+        .nav-left { display: flex; align-items: center; gap: 20px; }
 
         .menu-trigger {
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            padding: 10px 5px;
+            gap: 6px;
+            z-index: 1100;
+            padding: 10px;
         }
 
         .menu-trigger span {
             display: block;
-            width: 22px;
+            width: 25px;
             height: 2px;
             background: var(--gold);
+            transition: 0.3s;
         }
 
         .logo-text { 
             font-family: 'Cinzel', serif; 
-            font-size: 1.1rem; 
+            font-size: clamp(1rem, 4vw, 1.3rem); 
             font-weight: 700; 
-            letter-spacing: 1px; 
-            color: #fff;
+            letter-spacing: 2px; 
+            color: #fff; 
+            cursor: pointer;
+            white-space: nowrap;
         }
         .logo-text span { color: var(--gold); }
 
-        /* Search bar più grande su mobile */
-        .search-container { width: 100%; }
+        .search-container { flex: 1; max-width: 400px; margin: 0 20px; }
         .search-input {
             width: 100%;
-            background: #111;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 10px 15px;
             color: white;
-            font-size: 0.9rem;
-            border-radius: 4px;
+            font-size: 0.75rem;
             outline: none;
         }
 
-        /* Side Menu a tutta altezza e larghezza variabile */
+        .nav-links { display: flex; gap: 15px; }
+        .nav-links p { cursor:pointer; font-size:0.6rem; letter-spacing:1.5px; text-transform:uppercase; white-space: nowrap; }
+
+        /* Mobile Adjustments for Nav */
+        @media (max-width: 768px) {
+            nav { height: 70px; }
+            .nav-links { display: none; } /* Nascondi link testuali su mobile per spazio */
+            .search-container { margin: 0 10px; }
+            .logo-text { font-size: 0.9rem; }
+        }
+
+        /* Side Menu */
         .side-menu {
             position: fixed;
             top: 0; left: -100%;
-            width: 85%; /* Quasi tutto lo schermo su mobile */
-            max-width: 320px;
+            width: 300px;
             height: 100vh;
             background: #0a0a0a;
             z-index: 1050;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 30px 20px;
-            border-right: 1px solid var(--gold);
+            transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+            padding: 100px 30px 40px 30px;
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
             overflow-y: auto;
         }
+
         .side-menu.active { left: 0; }
 
-        .menu-list { list-style: none; margin-top: 30px; }
+        .menu-list { list-style: none; margin-top: 20px; }
+        .menu-list li {
+            margin-bottom: 12px;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #555;
+        }
         .menu-list li.clickable {
             color: var(--gold);
             font-weight: 800;
-            padding: 15px 0;
-            border-bottom: 1px solid #222;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
         }
 
-        /* Modali ottimizzate per schermi piccoli */
+        .brand-link {
+            color: #eee;
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 8px 0;
+            display: block;
+            transition: 0.2s;
+        }
+        .brand-link:hover { color: var(--gold); padding-left: 5px; }
+
+        /* Modals */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98);
+            background: rgba(0,0,0,0.96);
             z-index: 2000;
-            overflow-y: auto;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(15px);
             padding: 15px;
         }
 
         .modal-content {
-            background: #0d0d0d;
-            padding: 25px 15px;
+            background: #0a0a0a;
+            padding: 30px;
             border-top: 3px solid var(--gold);
+            max-width: 550px;
             width: 100%;
-            margin: 20px auto;
-            max-width: 500px;
-            border-radius: 4px;
+            text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
         }
 
-        /* Form ottimizzato per touch */
-        .form-grid { display: flex; flex-direction: column; gap: 15px; }
-        .form-input { 
-            width: 100%; 
-            background: #1a1a1a; 
-            border: 1px solid #333; 
-            padding: 14px; 
-            color: white; 
-            font-size: 1rem; /* Previene lo zoom automatico su iOS */
+        .modal-content h4 { color: var(--gold); margin-bottom: 15px; font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 1.2rem; }
+        .modal-content p { color: #bbb; line-height: 1.6; font-size: 0.85rem; margin-bottom: 20px; }
+
+        /* License Table Styles */
+        .license-list { list-style: none; text-align: left; margin: 20px 0; }
+        .license-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #222;
+            font-size: 0.8rem;
+        }
+        .license-name { color: var(--gold); font-weight: 700; letter-spacing: 1px; }
+        .license-price { color: #fff; font-weight: 900; }
+
+        /* Form */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; text-align: left; margin-bottom: 20px; }
+        .form-group { margin-bottom: 10px; }
+        .form-group.full { grid-column: span 2; }
+        .form-group label { display: block; font-size: 0.6rem; color: var(--gold); margin-bottom: 5px; letter-spacing: 1px; }
+        .form-input { width: 100%; background: #111; border: 1px solid #333; padding: 12px; color: white; font-family: 'Montserrat'; font-size: 0.85rem; }
+
+        @media (max-width: 480px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full { grid-column: span 1; }
         }
 
-        /* Grid adattiva */
-        .catalogue-section { padding: 160px 15px 40px 15px; }
+        .info-note { 
+            background: rgba(212, 175, 55, 0.05); 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            padding: 12px; 
+            font-size: 0.7rem; 
+            color: #ccc; 
+            margin-bottom: 20px; 
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .btn-gold { background: var(--gold); color: #000; border: none; padding: 15px; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: 0.75rem; width: 100%; transition: 0.3s; }
+        .btn-gold:hover { background: #fff; }
+
+        /* Hero & Section */
+        .hero-section { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+        .hero-section h1 { font-family: 'Cinzel', serif; font-size: clamp(2rem, 12vw, 6rem); background: linear-gradient(to bottom, #fff, #999); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; }
+
+        .catalogue-section { padding: 120px 5% 60px 5%; background: var(--dark); min-height: 100vh; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
         
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
-            gap: 12px; 
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr 1fr; gap: 10px; } /* Due colonne su mobile per efficienza */
+            .card { padding: 25px 10px !important; }
+            .card h3 { font-size: 0.8rem !important; }
         }
 
-        .card { 
-            background: rgba(13, 13, 13, 0.9); 
-            border: 1px solid #1a1a1a; 
-            padding: 25px 10px; 
-            border-radius: 2px;
-        }
+        .card { background: #0d0d0d; border: 1px solid #1a1a1a; padding: 40px 15px; text-align: center; transition: 0.4s; opacity: 0; transform: translateY(20px); cursor: pointer; }
+        .card.visible { opacity: 1; transform: translateY(0); }
+        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .card h3 { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; margin: 10px 0; }
+        .card span { color: var(--gold); font-size: 0.55rem; letter-spacing: 2px; display: block; }
+        .card .price { color: #fff; font-weight: 700; margin-top: 15px; display: block; font-size: 0.9rem; }
+
+        .btn-back { background: transparent; color: var(--gold); padding: 10px 25px; border: 1px solid var(--gold); cursor: pointer; margin-bottom: 30px; display: none; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; }
         
-        .card h3 { font-size: 0.85rem; margin: 5px 0; }
-        .card .price { font-size: 0.9rem; color: var(--gold); font-weight: 900; }
-
-        .hero-section h1 { 
-            font-family: 'Cinzel', serif; 
-            font-size: 2.5rem; 
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        /* Utility */
-        .btn-gold { 
-            background: var(--gold); 
-            color: #000; 
-            padding: 16px; 
-            font-weight: 900; 
-            border: none; 
-            width: 100%; 
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        .btn-back {
-            background: none;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 10px 20px;
-            margin-bottom: 20px;
-            width: 100%;
-            display: none;
-        }
-
-        /* Desktop Adjustments */
-        @media (min-width: 768px) {
-            nav { flex-direction: row; padding: 20px 5%; height: 90px; }
-            .nav-top { width: auto; }
-            .search-container { max-width: 350px; }
-            .hero-section h1 { font-size: 5rem; }
-            .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
-            .modal { align-items: center; display: none; } /* Torna flex via JS se necessario */
-        }
+        footer { padding: 40px; text-align: center; color: #444; font-size: 0.6rem; letter-spacing: 3px; border-top: 1px solid #111; }
     </style>
 </head>
 <body>
@@ -217,44 +240,42 @@
 <div class="hero-bg"></div>
 
 <nav>
-    <div class="nav-top">
+    <div class="nav-left">
         <div class="menu-trigger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
-        <div class="logo-text" onclick="location.reload()">CarsAroundTheWorld<span>.</span></div>
-        <div style="display: flex; gap: 10px;">
-            <span onclick="openModal('sede')" style="font-size:0.6rem; border: 1px solid #333; padding: 5px;">SEDE</span>
-        </div>
+        <div class="logo-text" onclick="showBrands()">CarsAroundTheWorld<span>.</span></div>
     </div>
     
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Cerca veicolo o brand..." oninput="handleSearch()">
+        <input type="text" id="searchInput" class="search-input" placeholder="CERCA MODELLO O MARCHIO..." oninput="handleSearch()">
+    </div>
+
+    <div class="nav-links">
+        <p onclick="openModal('storia')">Storia</p>
+        <p onclick="openModal('sede')">Sede</p>
+        <p onclick="openModal('orari')">Orari</p>
     </div>
 </nav>
 
 <div id="sideMenu" class="side-menu">
-    <p onclick="toggleMenu()" style="color:var(--gold); font-weight:bold; margin-bottom: 30px;">✕ CHIUDI MENU</p>
+    <p onclick="toggleMenu()" style="color:var(--gold); cursor:pointer; font-size:0.7rem; letter-spacing:2px; margin-bottom: 30px; font-weight: 700;">← CHIUDI MENU</p>
     <ul class="menu-list">
-        <li class="clickable" onclick="openPreventivo()">💎 PREVENTIVO IMPORT</li>
-        <li class="clickable" onclick="openPatenti()">📜 LISTINO PATENTI</li>
-        <li style="color: #444; font-size: 0.7rem; margin-top: 25px; text-transform: uppercase;">Sfoglia Catalogo</li>
+        <li class="clickable" onclick="openPreventivo()">✨ PREVENTIVO IMPORT</li>
+        <li class="clickable" onclick="openPatenti()">📜 PATENTI</li>
+        <li style="color: var(--gold); margin-top: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; font-weight: 700;">ESPLORA MARCHI</li>
         <div id="brandMenuList"></div>
     </ul>
 </div>
 
 <div id="modal-patenti" class="modal" onclick="closePatenti()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <h4 style="color:var(--gold); font-family:'Cinzel';">PATENTI</h4>
-        <div style="text-align: left; margin: 20px 0;">
-            <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid #222;">
-                <span>PATENTE A</span><b style="color:var(--gold)">$1.000</b>
-            </div>
-            <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid #222;">
-                <span>PATENTE B</span><b style="color:var(--gold)">$1.500</b>
-            </div>
-            <div style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px solid #222;">
-                <span>PATENTE C</span><b style="color:var(--gold)">$2.000</b>
-            </div>
+        <h4>Listino Patenti</h4>
+        <p>Certificazioni ufficiali rilasciate presso la nostra sede.</p>
+        <div class="license-list">
+            <div class="license-item"><span class="license-name">PATENTE A (MOTO)</span><span class="license-price">$1.000</span></div>
+            <div class="license-item"><span class="license-name">PATENTE B (AUTO)</span><span class="license-price">$1.500</span></div>
+            <div class="license-item"><span class="license-name">PATENTE C (MEZZI PESANTI)</span><span class="license-price">$2.000</span></div>
         </div>
         <button class="btn-gold" onclick="closePatenti()">Chiudi</button>
     </div>
@@ -262,39 +283,40 @@
 
 <div id="modal-preventivo" class="modal">
     <div class="modal-content">
-        <h4 style="color:var(--gold); font-family:'Cinzel'; margin-bottom:15px;">IMPORT RICHIESTA</h4>
-        <p style="font-size: 0.75rem; color: #888; margin-bottom: 20px;">Compila il modulo. Simeon ti contatterà per un appuntamento in sede.</p>
-        
-        <div class="form-grid">
-            <input type="text" id="imp-name" class="form-input" placeholder="Nome Completo IC">
-            <input type="text" id="imp-phone" class="form-input" placeholder="Numero di Telefono">
-            <input type="text" id="imp-brand" class="form-input" placeholder="Marchio Veicolo">
-            <input type="text" id="imp-model" class="form-input" placeholder="Modello Specifico">
+        <h4>Richiesta d'Importazione</h4>
+        <div class="info-note">
+            <strong>NOTA:</strong> Sarai ricontattato per <strong>fissare un incontro di persona</strong> presso il nostro Showroom per discutere il prezzo finale.
         </div>
-
+        <div class="form-grid">
+            <div class="form-group"><label>NOME COMPLETO (IC)</label><input type="text" id="imp-name" class="form-input" placeholder="John Doe"></div>
+            <div class="form-group"><label>NUMERO DI TELEFONO</label><input type="text" id="imp-phone" class="form-input" placeholder="555-1234"></div>
+            <div class="form-group full"><label>INDIRIZZO DI RESIDENZA</label><input type="text" id="imp-address" class="form-input" placeholder="Pillbox Hill, Apt 4"></div>
+            <div class="form-group"><label>MARCHIO VEICOLO</label><input type="text" id="imp-brand" class="form-input" placeholder="es. Grotti"></div>
+            <div class="form-group"><label>MODELLO VEICOLO</label><input type="text" id="imp-model" class="form-input" placeholder="es. Itali RSX"></div>
+        </div>
         <button class="btn-gold" onclick="sendToDiscord()">Invia a Simeon</button>
-        <p onclick="closePreventivo()" style="margin-top:20px; font-size:0.7rem; color: #555;">ANNULLA</p>
+        <p onclick="closePreventivo()" style="margin-top:20px; cursor:pointer; font-size:0.6rem; opacity:0.5; letter-spacing:2px; text-transform: uppercase;">ANNULLA</p>
     </div>
 </div>
 
-<div id="modal-sede" class="modal" onclick="closeModals()"><div class="modal-content"><h4>Showroom</h4><p>Pillbox Hill, Adam's Apple Blvd.</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
+<div id="modal-storia" class="modal" onclick="closeModals()"><div class="modal-content" onclick="event.stopPropagation()"><h4>Eredità</h4><p>CarsAroundTheWorld è la destinazione finale per il collezionista esigente. Una visione nata dalla passione per la perfezione meccanica.</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
+<div id="modal-sede" class="modal" onclick="closeModals()"><div class="modal-content" onclick="event.stopPropagation()"><h4>Showroom</h4><p>Visita Simeon Yetarian tra Power St. e Adam's Apple Blvd, Pillbox Hill.</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
+<div id="modal-orari" class="modal" onclick="closeModals()"><div class="modal-content" onclick="event.stopPropagation()"><h4>Orari</h4><p>Aperti tutti i giorni: 15:00 — 00:00</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
 
-<div class="hero-section" id="heroText">
-    <p style="color:var(--gold); letter-spacing:5px; font-size:0.6rem">ELEGANCE & POWER</p>
-    <h1>AVANT-GARDE</h1>
+<div class="hero-section">
+    <h1>AVANT-GARDE.</h1>
+    <p style="color:var(--gold); letter-spacing:10px; font-size:0.7rem; font-weight: 600;">DESIGN & EFFICIENCY</p>
 </div>
 
 <div class="catalogue-section">
-    <button class="btn-back" id="backBtn" onclick="showBrands()">← TORNA AI MARCHI</button>
+    <center><button class="btn-back" id="backBtn" onclick="showBrands()">← Torna ai Marchi</button></center>
     <div id="mainGrid" class="grid"></div>
 </div>
 
-<footer style="padding: 30px; opacity: 0.3; font-size: 0.5rem; letter-spacing: 2px;">
-    CARSAROUNDTHEWORLD © 2026 — LOS SANTOS
-</footer>
+<footer>CARSAROUNDTHEWORLD.COM — © 2026</footer>
 
 <script>
-// I tuoi dati (carData) rimangono identici
+// Car Data (Mantenuto identico)
 const carData = {
     Albany: [{m: "Alpha", p: "$14.900"}, {m: "Cavalcade Gen.2", p: "$11.800"}, {m: "Cavalcade XL", p: "$24.000"}, {m: "Emperor", p: "$4.900"}, {m: "Fränken Stange", p: "$24.500"}, {m: "Primo", p: "$6.680"}, {m: "V-STR", p: "$48.000"}, {m: "Washington", p: "$11.250"}],
     Annis: [{m: "Elegy Retro Custom", p: "$39.900"}, {m: "Elegy RH8", p: "$36.000"}, {m: "Euros", p: "$28.000"}, {m: "Remus", p: "$22.000"}, {m: "ZR350", p: "$26.400"}],
@@ -308,7 +330,7 @@ const carData = {
     Coil: [{m: "Brawler", p: "$35.000"}, {m: "Raiden", p: "$23.000"}, {m: "Voltic", p: "$105.000"}],
     Declasse: [{m: "Burrito", p: "$13.000"}, {m: "Granger 3600XL", p: "$54.000"}, {m: "Impaler", p: "$13.200"}, {m: "Mamba", p: "$72.100"}, {m: "Premier", p: "$1.800"}, {m: "Rancher XL", p: "$11.700"}, {m: "Sabre Turbo", p: "$21.500"}, {m: "Hotring Sabre", p: "$23.000"}, {m: "Tahoma Coupe", p: "$21.400"}, {m: "Tulip", p: "$21.600"}, {m: "Vamos", p: "$21.950"}, {m: "Vigero ZX", p: "$52.000"}, {m: "Walton L35", p: "$23.300"}, {m: "Yosemite", p: "$22.000"}, {m: "Yosemite 1500", p: "$15.000"}, {m: "Yosemite Rancher", p: "$13.500"}],
     Dewbauchee: [{m: "Champion", p: "$224.000"}, {m: "JB 700", p: "$100.000"}, {m: "Seven-70", p: "$82.000"}, {m: "Vagner", p: "$175.000"}],
-    Dinka: [{m: "Akuma (Moto)", p: "$11.000"}, {m: "Blista", p: "$1.700"}, {m: "Blista Kanjo", p: "$11.000"}, {m: "Chavos V6", p: "$21.100"}, {m: "Jester", p: "$69.000"}, {m: "Jester Classic", p: "$92.000"}, {m: "Jester RR", p: "$107.000"}, {m: "Postlude", p: "$1.700"}, {m: "Thrust", p: "$11.100"}, {m: "Vindicator", p: "$21.000"}],
+    Dinka: [{m: "Akuma", p: "$11.000"}, {m: "Blista", p: "$1.700"}, {m: "Blista Kanjo", p: "$11.000"}, {m: "Chavos V6", p: "$21.100"}, {m: "Jester", p: "$69.000"}, {m: "Jester Classic", p: "$92.000"}, {m: "Jester RR", p: "$107.000"}, {m: "Postlude", p: "$1.700"}, {m: "Thrust", p: "$11.100"}, {m: "Vindicator", p: "$21.000"}],
     Dundreary: [{m: "Landstalker XL", p: "$41.850"}, {m: "Regina", p: "$11.350"}],
     Emperor: [{m: "ETR1", p: "$175.000"}, {m: "Vectre", p: "$67.000"}],
     Enus: [{m: "Deity", p: "$102.000"}, {m: "Jubilee", p: "$130.000"}, {m: "Paragon R", p: "$80.000"}, {m: "Paragon S", p: "$100.000"}, {m: "Super Diamond", p: "$73.000"}, {m: "Windsor", p: "$55.000"}, {m: "Windsor Drop", p: "$49.000"}],
@@ -321,20 +343,20 @@ const carData = {
     Invetero: [{m: "Coquette BlackFin", p: "$33.000"}, {m: "Coquette Classic", p: "$45.000"}],
     Karin: [{m: "190z", p: "$21.700"}, {m: "Asterope GZ", p: "$11.500"}, {m: "BeeJay XL", p: "$12.000"}, {m: "Boor", p: "$11.700"}, {m: "Calico GTF", p: "$25.000"}, {m: "Everon", p: "$16.500"}, {m: "Futo", p: "$11.000"}, {m: "Futo GTX", p: "$11.300"}, {m: "Previon", p: "$23.500"}, {m: "Sultan", p: "$12.500"}, {m: "Sultan RS", p: "$25.000"}, {m: "Sultan RS Classic", p: "$15.900"}],
     Lampadati: [{m: "Casco", p: "$21.500"}, {m: "Cinquemila", p: "$57.400"}, {m: "Corsita", p: "$205.000"}, {m: "Felon", p: "$21.300"}, {m: "Komoda", p: "$58.000"}, {m: "Novak", p: "$47.000"}, {m: "Tigon", p: "$105.000"}, {m: "Viseris", p: "$40.000"}],
-    LCC: [{m: "Hexer (Moto)", p: "$2.200"}, {m: "Sanctus (Moto)", p: "$11.500"}],
+    LCC: [{m: "Hexer", p: "$2.200"}, {m: "Sanctus", p: "$11.500"}],
     Maibatsu: [{m: "Manchez", p: "$1.800"}, {m: "Manchez Scout", p: "$11.800"}, {m: "MostroCiti", p: "$11.500"}, {m: "Mule", p: "$13.000"}, {m: "Mule Custom", p: "$14.000"}, {m: "Penumbra FF", p: "$21.700"}],
     Mammoth: [{m: "Patriot", p: "$13.000"}],
     MTL: [{m: "Brickade", p: "$37.000"}, {m: "Dune", p: "$35.000"}, {m: "Pounder Custom", p: "$35.000"}, {m: "Wastelander", p: "$25.000"}],
-    Nagasaki: [{m: "Carbon RS (Moto)", p: "$21.500"}, {m: "Chimera (Moto)", p: "$13.000"}, {m: "Outlaw", p: "$15.000"}, {m: "Shinobi (Moto)", p: "$39.000"}],
+    Nagasaki: [{m: "Carbon RS", p: "$21.500"}, {m: "Chimera", p: "$13.000"}, {m: "Outlaw", p: "$15.000"}, {m: "Shinobi", p: "$39.000"}],
     Obey: [{m: "8F Drafter", p: "$42.000"}, {m: "10F", p: "$160.000"}, {m: "I-Wagen", p: "$56.500"}, {m: "Omnis e-GT", p: "$68.000"}, {m: "Tailgater S", p: "$39.500"}],
     Ocelot: [{m: "F620", p: "$31.600"}, {m: "Locust", p: "$24.000"}, {m: "Pariah", p: "$140.000"}, {m: "Virtue", p: "$239.000"}, {m: "XA-21", p: "$220.000"}],
     Pegassi: [{m: "Bati 801", p: "$32.500"}, {m: "Esskey", p: "$1.700"}, {m: "Faggio", p: "$1.200"}, {m: "Faggio Mod", p: "$1.150"}, {m: "FCR 1000", p: "$1.800"}, {m: "Ignus", p: "$240.000"}, {m: "Osiris", p: "$255.000"}, {m: "Reaper", p: "$200.000"}, {m: "Tempesta", p: "$140.000"}, {m: "Tezeract", p: "$200.000"}, {m: "Torero XO", p: "$250.000"}, {m: "Toros", p: "$133.000"}, {m: "Vortex", p: "$11.000"}, {m: "Zentorno", p: "$140.000"}],
     Pfister: [{m: "811", p: "$135.000"}, {m: "Astron", p: "$71.500"}, {m: "Comet Retro Custom", p: "$12.000"}, {m: "Comet S2", p: "$122.000"}, {m: "Growler", p: "$120.000"}, {m: "Neon", p: "$150.000"}],
-    Principe: [{m: "Deveste Eight", p: "$150.000"}, {m: "Diabolus (Moto)", p: "$1.500"}],
+    Principe: [{m: "Deveste Eight", p: "$150.000"}, {m: "Diabolus", p: "$1.500"}],
     Progen: [{m: "Emerus", p: "$180.000"}, {m: "Itali GTB", p: "$110.000"}, {m: "T20", p: "$190.000"}],
     Rune: [{m: "Cheburek", p: "$11.550"}],
     Schyster: [{m: "Deviant", p: "$23.200"}, {m: "Fusilade", p: "$1.750"}],
-    Shitzu: [{m: "Hakuchou (Moto)", p: "$23.000"}, {m: "Hakuchou Drag", p: "$25.000"}, {m: "Vader (Moto)", p: "$1.500"}],
+    Shitzu: [{m: "Hakuchou", p: "$23.000"}, {m: "Hakuchou Drag", p: "$25.000"}, {m: "Vader", p: "$1.500"}],
     Toundra: [{m: "Panthere", p: "$26.500"}],
     Truffade: [{m: "Thrax", p: "$150.000"}, {m: "Z-Type", p: "$1.000.000"}],
     Vapid: [{m: "Aleutian", p: "$17.000"}, {m: "Bobcat XL", p: "$11.200"}, {m: "Caracara 4x4", p: "$60.000"}, {m: "Dominator", p: "$11.150"}, {m: "Dominator GTT", p: "$33.000"}, {m: "Dominator GTX", p: "$48.000"}, {m: "Dominator ASP", p: "$23.400"}, {m: "Firebolt ASP", p: "$21.700"}, {m: "Minivan", p: "$1.700"}, {m: "Radius", p: "$700"}, {m: "Retinue Mk II", p: "$1.300"}, {m: "Riata", p: "$1.200"}, {m: "Sadler", p: "$1.400"}, {m: "Slamvan", p: "$12.000"}, {m: "Speedo Custom", p: "$4.000"}, {m: "Stainer", p: "$1.000"}, {m: "Uranos LozSpeed", p: "$900"}, {m: "Winky", p: "$500"}],
@@ -346,7 +368,7 @@ const carData = {
 };
 
 function toggleMenu() { document.getElementById('sideMenu').classList.toggle('active'); }
-function openModal(id) { document.getElementById('modal-' + id).style.display = 'block'; }
+function openModal(id) { document.getElementById('modal-' + id).style.display = 'flex'; }
 function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
 function openPreventivo() { toggleMenu(); openModal('preventivo'); }
 function closePreventivo() { document.getElementById('modal-preventivo').style.display = 'none'; }
@@ -357,79 +379,95 @@ async function sendToDiscord() {
     const webhook = "https://discord.com/api/webhooks/1461481890979512331/6tr05O339hTo2UV-jVXi0Pw9JsU5-Jm2JpMDYGebVK_wWN4jldQiaFY1uypgGur2geEG";
     const name = document.getElementById('imp-name').value;
     const phone = document.getElementById('imp-phone').value;
+    const address = document.getElementById('imp-address').value;
     const brand = document.getElementById('imp-brand').value;
     const model = document.getElementById('imp-model').value;
 
-    if(!name || !phone || !brand || !model) return alert("Compila tutti i campi.");
+    if(!name || !phone || !address || !brand || !model) return alert("Per favore, compila tutti i campi richiesti.");
 
     const payload = {
         embeds: [{
-            title: "💎 RICHIESTA IMPORT",
+            title: "💎 NUOVA RICHIESTA DI CONSULENZA IMPORT",
             color: 13938487,
             fields: [
                 { name: "👤 Cliente", value: name, inline: true },
                 { name: "📞 Telefono", value: phone, inline: true },
-                { name: "🚗 Veicolo", value: brand.toUpperCase() + " " + model, inline: false }
+                { name: "🏠 Indirizzo", value: address, inline: false },
+                { name: "🚗 Veicolo Interessato", value: brand.toUpperCase() + " " + model, inline: true },
+                { name: "📅 Azione", value: "Fissare Incontro per Prezzo & Dettagli", inline: true }
             ],
-            footer: { text: "CarsAroundTheWorld Mobile" }
+            footer: { text: "CarsAroundTheWorld - Luxury Import Division" },
+            timestamp: new Date()
         }]
     };
 
     try {
         const res = await fetch(webhook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-        if(res.ok) { alert("Richiesta Inviata!"); closePreventivo(); }
-    } catch(e) { alert("Errore connessione."); }
+        if(res.ok) {
+            alert("Informazioni inviate! Simeon visionerà i tuoi dati e ti contatterà presto.");
+            closePreventivo();
+        } else { alert("Errore del server. Riprova."); }
+    } catch(e) { alert("Errore di connessione."); }
 }
 
 const grid = document.getElementById('mainGrid');
 const backBtn = document.getElementById('backBtn');
-const heroText = document.getElementById('heroText');
+const searchInput = document.getElementById('searchInput');
 
 function populateBrandMenu() {
     const menuContainer = document.getElementById('brandMenuList');
     Object.keys(carData).sort().forEach(b => {
-        const li = document.createElement('li'); li.className = 'brand-link'; li.style.padding="10px 0"; li.style.fontSize="0.8rem"; li.style.color="#ccc"; li.style.listStyle="none";
-        li.textContent = b.toUpperCase();
+        const li = document.createElement('li'); li.className = 'brand-link'; li.textContent = b;
         li.onclick = () => { showCars(b); toggleMenu(); };
         menuContainer.appendChild(li);
     });
 }
 
 function showBrands() {
-    grid.innerHTML = ''; backBtn.style.display = 'none'; heroText.style.display = 'block';
+    grid.innerHTML = ''; backBtn.style.display = 'none'; searchInput.value = '';
     Object.keys(carData).sort().forEach(brand => {
         const card = document.createElement('div'); card.className = 'card';
-        card.innerHTML = `<span style="font-size:0.5rem; opacity:0.6;">BRAND</span><h3 style="color:var(--gold)">${brand}</h3><p style="font-size:0.6rem; margin-top:5px;">${carData[brand].length} MODELLI</p>`;
+        card.innerHTML = `<span>MANIFATTURA</span><h3>${brand}</h3><p style="font-size:0.55rem; color:var(--gold); margin-top:5px; font-weight:700;">${carData[brand].length} MODELLI</p>`;
         card.onclick = () => showCars(brand);
         grid.appendChild(card);
     });
+    setTimeout(animate, 100);
 }
 
 function showCars(brand) {
-    grid.innerHTML = ''; backBtn.style.display = 'block'; heroText.style.display = 'none';
+    grid.innerHTML = ''; backBtn.style.display = 'inline-block';
     carData[brand].sort((a,b) => a.m.localeCompare(b.m)).forEach(c => {
         const card = document.createElement('div'); card.className = 'card';
-        card.innerHTML = `<span style="font-size:0.5rem; opacity:0.6;">${brand}</span><h3>${c.m}</h3><span class="price">${c.p}</span>`;
+        card.innerHTML = `<span>${brand.toUpperCase()}</span><h3>${c.m}</h3><span class="price">${c.p}</span>`;
         grid.appendChild(card);
     });
-    window.scrollTo(0,0);
+    window.scrollTo({top: 0, behavior: 'smooth'}); setTimeout(animate, 100);
 }
 
 function handleSearch() {
-    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    const q = searchInput.value.toLowerCase().trim();
     if(!q) return showBrands();
-    grid.innerHTML = ''; backBtn.style.display = 'block'; heroText.style.display = 'none';
+    grid.innerHTML = ''; backBtn.style.display = 'inline-block';
     Object.keys(carData).forEach(b => {
         carData[b].forEach(c => {
             if(c.m.toLowerCase().includes(q) || b.toLowerCase().includes(q)) {
                 const card = document.createElement('div'); card.className = 'card';
-                card.innerHTML = `<span style="font-size:0.5rem; opacity:0.6;">${b}</span><h3>${c.m}</h3><span class="price">${c.p}</span>`;
+                card.innerHTML = `<span>${b.toUpperCase()}</span><h3>${c.m}</h3><span class="price">${c.p}</span>`;
                 grid.appendChild(card);
             }
         });
     });
+    animate();
 }
 
+function animate() {
+    document.querySelectorAll('.card').forEach(c => { 
+        const rect = c.getBoundingClientRect();
+        if(rect.top < window.innerHeight) c.classList.add('visible'); 
+    });
+}
+
+window.addEventListener('scroll', animate);
 populateBrandMenu();
 showBrands();
 </script>
