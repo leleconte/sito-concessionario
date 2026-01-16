@@ -148,6 +148,21 @@
         .modal-content h4 { color: var(--gold); margin-bottom: 15px; font-family: 'Cinzel', serif; letter-spacing: 3px; }
         .modal-content p { color: #bbb; line-height: 1.6; font-size: 0.85rem; margin-bottom: 20px; }
 
+        /* License Table Styles */
+        .license-list {
+            list-style: none;
+            text-align: left;
+            margin: 20px 0;
+        }
+        .license-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #222;
+        }
+        .license-name { color: var(--gold); font-weight: 700; letter-spacing: 1px; }
+        .license-price { color: #fff; font-weight: 900; }
+
         /* Form */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; text-align: left; margin-bottom: 20px; }
         .form-group { margin-bottom: 10px; }
@@ -211,9 +226,32 @@
     <p onclick="toggleMenu()" style="color:var(--gold); cursor:pointer; font-size:0.7rem; letter-spacing:2px; margin-bottom: 30px;">← CHIUDI</p>
     <ul class="menu-list">
         <li class="clickable" onclick="openPreventivo()">✨ PREVENTIVO IMPORT</li>
+        <li class="clickable" onclick="openPatenti()">📜 PATENTI</li>
         <li style="color: var(--gold); margin-top: 20px; border-bottom: 1px solid #222; padding-bottom: 10px;">ESPLORA MARCHI</li>
         <div id="brandMenuList"></div>
     </ul>
+</div>
+
+<div id="modal-patenti" class="modal" onclick="closePatenti()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h4>Listino Patenti</h4>
+        <p>Certificazioni ufficiali rilasciate presso la nostra sede.</p>
+        <div class="license-list">
+            <div class="license-item">
+                <span class="license-name">PATENTE A (MOTO)</span>
+                <span class="license-price">$1.000</span>
+            </div>
+            <div class="license-item">
+                <span class="license-name">PATENTE B (AUTO)</span>
+                <span class="license-price">$1.500</span>
+            </div>
+            <div class="license-item">
+                <span class="license-name">PATENTE C (MEZZI PESANTI)</span>
+                <span class="license-price">$2.000</span>
+            </div>
+        </div>
+        <button class="btn-gold" onclick="closePatenti()">Chiudi</button>
+    </div>
 </div>
 
 <div id="modal-preventivo" class="modal">
@@ -309,10 +347,13 @@ function closeModals() { document.querySelectorAll('.modal').forEach(m => m.styl
 function openPreventivo() { toggleMenu(); openModal('preventivo'); }
 function closePreventivo() { document.getElementById('modal-preventivo').style.display = 'none'; }
 
+// Patenti functions
+function openPatenti() { toggleMenu(); openModal('patenti'); }
+function closePatenti() { document.getElementById('modal-patenti').style.display = 'none'; }
+
 async function sendToDiscord() {
     const webhook = "https://discord.com/api/webhooks/1461481890979512331/6tr05O339hTo2UV-jVXi0Pw9JsU5-Jm2JpMDYGebVK_wWN4jldQiaFY1uypgGur2geEG";
     
-    // Dati Form
     const name = document.getElementById('imp-name').value;
     const phone = document.getElementById('imp-phone').value;
     const address = document.getElementById('imp-address').value;
