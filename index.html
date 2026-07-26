@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CarsAroundTheWorld | Luxury Dealer</title>
+    <title>Charming Car | Concessionario</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -232,6 +232,67 @@
 
         .btn-back { background: transparent; color: var(--gold); padding: 10px 25px; border: 1px solid var(--gold); cursor: pointer; margin-bottom: 30px; display: none; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 2px; }
         
+
+        .card-order-btn {
+            margin-top: 18px;
+            width: 100%;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            padding: 10px 12px;
+            font-size: 0.62rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .card-order-btn:hover { background: var(--gold); color: #000; }
+
+        .order-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            padding: 14px;
+            margin-bottom: 18px;
+            background: rgba(212, 175, 55, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            text-align: left;
+        }
+        .order-summary div { min-width: 0; }
+        .order-summary small {
+            display: block;
+            color: var(--gold);
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+        .order-summary strong {
+            display: block;
+            color: #fff;
+            font-size: 0.8rem;
+            overflow-wrap: anywhere;
+        }
+        .order-status {
+            display: none;
+            margin-top: 14px;
+            padding: 12px;
+            font-size: 0.72rem;
+            line-height: 1.5;
+            text-align: left;
+            border: 1px solid #333;
+            background: #101010;
+        }
+        .order-status.success { display: block; border-color: #2f8f58; color: #bfffd5; }
+        .order-status.error { display: block; border-color: #a63e3e; color: #ffd0d0; }
+        .btn-gold:disabled { opacity: 0.55; cursor: wait; }
+        select.form-input { appearance: none; cursor: pointer; }
+        textarea.form-input { min-height: 88px; resize: vertical; }
+
+        @media (max-width: 480px) {
+            .order-summary { grid-template-columns: 1fr; }
+        }
+
         footer { padding: 40px; text-align: center; color: #444; font-size: 0.6rem; letter-spacing: 3px; border-top: 1px solid #111; }
     </style>
 </head>
@@ -244,7 +305,7 @@
         <div class="menu-trigger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
-        <div class="logo-text" onclick="showBrands()">CarsAroundTheWorld<span>.</span></div>
+        <div class="logo-text" onclick="showBrands()">Charming Car<span>.</span></div>
     </div>
     
     <div class="search-container">
@@ -261,51 +322,47 @@
 <div id="sideMenu" class="side-menu">
     <p onclick="toggleMenu()" style="color:var(--gold); cursor:pointer; font-size:0.7rem; letter-spacing:2px; margin-bottom: 30px; font-weight: 700;">← CHIUDI MENU</p>
     <ul class="menu-list">
-        <li class="clickable" onclick="openPreventivo()">✨ PREVENTIVO IMPORT</li>
-        <li class="clickable" onclick="openPatenti()">📜 PATENTI</li>
+        <li class="clickable" onclick="openOrderModal()">🚘 ORDINA UN VEICOLO</li>
+        <li class="clickable" onclick="scrollToCatalogue()">📖 CATALOGO VEICOLI</li>
         <li style="color: var(--gold); margin-top: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; font-weight: 700;">ESPLORA MARCHI</li>
         <div id="brandMenuList"></div>
     </ul>
 </div>
 
-<div id="modal-patenti" class="modal" onclick="closePatenti()">
+<div id="modal-order" class="modal" onclick="closeOrderModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-        <h4>Listino Patenti</h4>
-        <p>Certificazioni ufficiali rilasciate presso la nostra sede.</p>
-        <div class="license-list">
-            <div class="license-item"><span class="license-name">PATENTE A (MOTO)</span><span class="license-price">$1.000</span></div>
-            <div class="license-item"><span class="license-name">PATENTE B (AUTO)</span><span class="license-price">$1.500</span></div>
-            <div class="license-item"><span class="license-name">PATENTE C (MEZZI PESANTI)</span><span class="license-price">$2.000</span></div>
-        </div>
-        <button class="btn-gold" onclick="closePatenti()">Chiudi</button>
-    </div>
-</div>
-
-<div id="modal-preventivo" class="modal">
-    <div class="modal-content">
-        <h4>Richiesta d'Importazione</h4>
+        <h4>Ordina il tuo veicolo</h4>
         <div class="info-note">
-            <strong>NOTA:</strong> Sarai ricontattato per <strong>fissare un incontro di persona</strong> presso il nostro Showroom per discutere il prezzo finale.
+            Scegli un veicolo dal catalogo e lascia il tuo <strong>nickname Discord</strong>. Quando l'auto sarà disponibile in concessionaria, lo staff di Charming Car ti contatterà manualmente su Discord.
         </div>
+
+        <div class="order-summary">
+            <div><small>VEICOLO SELEZIONATO</small><strong id="order-summary-vehicle">Da selezionare</strong></div>
+            <div><small>PREZZO DI LISTINO</small><strong id="order-summary-price">—</strong></div>
+        </div>
+
         <div class="form-grid">
-            <div class="form-group"><label>NOME COMPLETO (IC)</label><input type="text" id="imp-name" class="form-input" placeholder="John Doe"></div>
-            <div class="form-group"><label>NUMERO DI TELEFONO</label><input type="text" id="imp-phone" class="form-input" placeholder="555-1234"></div>
-            <div class="form-group full"><label>INDIRIZZO DI RESIDENZA</label><input type="text" id="imp-address" class="form-input" placeholder="Pillbox Hill, Apt 4"></div>
-            <div class="form-group"><label>MARCHIO VEICOLO</label><input type="text" id="imp-brand" class="form-input" placeholder="es. Grotti"></div>
-            <div class="form-group"><label>MODELLO VEICOLO</label><input type="text" id="imp-model" class="form-input" placeholder="es. Itali RSX"></div>
+            <div class="form-group"><label>NOME E COGNOME (IC)</label><input type="text" id="order-name" class="form-input" maxlength="80" placeholder="Nome Cognome"></div>
+            <div class="form-group"><label>NUMERO DI TELEFONO (IC)</label><input type="text" id="order-phone" class="form-input" maxlength="40" placeholder="555-1234"></div>
+            <div class="form-group full"><label>NICKNAME DISCORD</label><input type="text" id="order-discord-nickname" class="form-input" maxlength="40" autocomplete="off" placeholder="es. @leleconte oppure leleconte"></div>
+            <div class="form-group"><label>MARCHIO</label><select id="order-brand" class="form-input" onchange="updateOrderModels()"></select></div>
+            <div class="form-group"><label>MODELLO</label><select id="order-model" class="form-input" onchange="updateOrderSelection()"></select></div>
+            <div class="form-group full"><label>NOTE PER IL CONCESSIONARIO (FACOLTATIVE)</label><textarea id="order-notes" class="form-input" maxlength="500" placeholder="Colore desiderato, informazioni aggiuntive..."></textarea></div>
         </div>
-        <button class="btn-gold" onclick="sendToDiscord()">Invia a Simeon</button>
-        <p onclick="closePreventivo()" style="margin-top:20px; cursor:pointer; font-size:0.6rem; opacity:0.5; letter-spacing:2px; text-transform: uppercase;">ANNULLA</p>
+
+        <button id="order-submit-btn" class="btn-gold" onclick="submitVehicleOrder()">Invia ordine a Charming Car</button>
+        <div id="order-status" class="order-status"></div>
+        <p onclick="closeOrderModal()" style="margin-top:20px; cursor:pointer; font-size:0.6rem; opacity:0.5; letter-spacing:2px; text-transform: uppercase;">ANNULLA</p>
     </div>
 </div>
 
-<div id="modal-storia" class="modal" onclick="closeModals()"><div class="modal-content" onclick="event.stopPropagation()"><h4>Eredità</h4><p>CarsAroundTheWorld è la destinazione finale per il collezionista esigente. Una visione nata dalla passione per la perfezione meccanica.</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
-<div id="modal-sede" class="modal" onclick="closeModals()"><div class="modal-content" onclick="event.stopPropagation()"><h4>Showroom</h4><p>Visita Simeon Yetarian tra Power St. e Adam's Apple Blvd, Pillbox Hill.</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
+<div id="modal-storia" class="modal" onclick="closeModals()"><div class="modal-content" onclick="event.stopPropagation()"><h4>Eredità</h4><p>Charming Car è il concessionario ufficiale di Charming Full RP: consulta il catalogo, scegli il veicolo e invia il tuo ordine direttamente al canale ordini dello staff.</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
+<div id="modal-sede" class="modal" onclick="closeModals()"><div class="modal-content" onclick="event.stopPropagation()"><h4>Showroom</h4><p>Vieni a trovarci nello showroom Charming Car per acquistare o ritirare il tuo veicolo ordinato.</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
 <div id="modal-orari" class="modal" onclick="closeModals()"><div class="modal-content" onclick="event.stopPropagation()"><h4>Orari</h4><p>Aperti tutti i giorni: 15:00 — 00:00</p><button class="btn-gold" onclick="closeModals()">Chiudi</button></div></div>
 
 <div class="hero-section">
-    <h1>AVANT-GARDE.</h1>
-    <p style="color:var(--gold); letter-spacing:10px; font-size:0.7rem; font-weight: 600;">DESIGN & EFFICIENCY</p>
+    <h1>CHARMING CAR.</h1>
+    <p style="color:var(--gold); letter-spacing:10px; font-size:0.7rem; font-weight: 600;">CATALOGO & ORDINI</p>
 </div>
 
 <div class="catalogue-section">
@@ -313,7 +370,7 @@
     <div id="mainGrid" class="grid"></div>
 </div>
 
-<footer>CARSAROUNDTHEWORLD.COM — © 2026</footer>
+<footer>CHARMING CAR — CHARMING FULL RP © 2026</footer>
 
 <script>
 // Car Data (Mantenuto identico)
@@ -367,47 +424,172 @@ const carData = {
     Ubermacht: [{m: "Cypher", p: "$55.000"}, {m: "Niobe", p: "$150.000"}, {m: "Oracle", p: "$11.000"}, {m: "Oracle XS", p: "$11.200"}, {m: "Rebla GTS", p: "$78.000"}, {m: "Rhinehart", p: "$67.000"}, {m: "Sentinel GTS", p: "$78.000"}, {m: "Sentinel", p: "$1.500"}, {m: "Sentinel XS", p: "$1.400"}, {m: "Zion", p: "$2.950"}]
 };
 
+// Webhook Discord usato per ricevere gli ordini direttamente dal sito.
+// ATTENZIONE: in un sito statico questo indirizzo è visibile nel codice pubblico.
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1531027319299248361/ftQ3agaTE-5wCwOcCiIge8bNkVteIbtIKveAZp4qhyd8yILWrHuraTgPom3PpRcv6rUb?wait=true";
+
 function toggleMenu() { document.getElementById('sideMenu').classList.toggle('active'); }
 function openModal(id) { document.getElementById('modal-' + id).style.display = 'flex'; }
 function closeModals() { document.querySelectorAll('.modal').forEach(m => m.style.display = 'none'); }
-function openPreventivo() { toggleMenu(); openModal('preventivo'); }
-function closePreventivo() { document.getElementById('modal-preventivo').style.display = 'none'; }
-function openPatenti() { toggleMenu(); openModal('patenti'); }
-function closePatenti() { document.getElementById('modal-patenti').style.display = 'none'; }
 
-async function sendToDiscord() {
-    const webhook = "https://discord.com/api/webhooks/1461481890979512331/6tr05O339hTo2UV-jVXi0Pw9JsU5-Jm2JpMDYGebVK_wWN4jldQiaFY1uypgGur2geEG";
-    const name = document.getElementById('imp-name').value;
-    const phone = document.getElementById('imp-phone').value;
-    const address = document.getElementById('imp-address').value;
-    const brand = document.getElementById('imp-brand').value;
-    const model = document.getElementById('imp-model').value;
+function scrollToCatalogue() {
+    document.getElementById('sideMenu').classList.remove('active');
+    document.querySelector('.catalogue-section').scrollIntoView({ behavior: 'smooth' });
+}
 
-    if(!name || !phone || !address || !brand || !model) return alert("Per favore, compila tutti i campi richiesti.");
+function openOrderModal(brand = '', model = '') {
+    document.getElementById('sideMenu').classList.remove('active');
+    populateOrderBrands();
+
+    if (brand && carData[brand]) {
+        document.getElementById('order-brand').value = brand;
+        updateOrderModels(model);
+    } else {
+        updateOrderModels();
+    }
+
+    setOrderStatus('', '');
+    document.getElementById('modal-order').style.display = 'flex';
+}
+
+function closeOrderModal() {
+    document.getElementById('modal-order').style.display = 'none';
+}
+
+function populateOrderBrands() {
+    const brandSelect = document.getElementById('order-brand');
+    const currentValue = brandSelect.value;
+    brandSelect.innerHTML = Object.keys(carData)
+        .sort((a, b) => a.localeCompare(b))
+        .map(brand => `<option value="${escapeHtml(brand)}">${escapeHtml(brand)}</option>`)
+        .join('');
+
+    if (currentValue && carData[currentValue]) brandSelect.value = currentValue;
+}
+
+function updateOrderModels(preferredModel = '') {
+    const brand = document.getElementById('order-brand').value;
+    const modelSelect = document.getElementById('order-model');
+    const models = carData[brand] || [];
+
+    modelSelect.innerHTML = models
+        .slice()
+        .sort((a, b) => a.m.localeCompare(b.m))
+        .map(car => `<option value="${escapeHtml(car.m)}">${escapeHtml(car.m)}</option>`)
+        .join('');
+
+    if (preferredModel && models.some(car => car.m === preferredModel)) {
+        modelSelect.value = preferredModel;
+    }
+
+    updateOrderSelection();
+}
+
+function updateOrderSelection() {
+    const brand = document.getElementById('order-brand').value;
+    const model = document.getElementById('order-model').value;
+    const car = (carData[brand] || []).find(item => item.m === model);
+
+    document.getElementById('order-summary-vehicle').textContent = model ? `${brand} ${model}` : 'Da selezionare';
+    document.getElementById('order-summary-price').textContent = car ? car.p : '—';
+}
+
+function setOrderStatus(message, type) {
+    const box = document.getElementById('order-status');
+    box.textContent = message;
+    box.className = 'order-status' + (type ? ` ${type}` : '');
+}
+
+function escapeHtml(value) {
+    return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+}
+
+async function submitVehicleOrder() {
+    const submitButton = document.getElementById('order-submit-btn');
+    const name = document.getElementById('order-name').value.trim();
+    const phone = document.getElementById('order-phone').value.trim();
+    const discordNickname = document.getElementById('order-discord-nickname').value.trim();
+    const brand = document.getElementById('order-brand').value;
+    const model = document.getElementById('order-model').value;
+    const notes = document.getElementById('order-notes').value.trim();
+    const car = (carData[brand] || []).find(item => item.m === model);
+
+    if (!name || !phone || !discordNickname || !brand || !model || !car) {
+        setOrderStatus('Compila tutti i campi obbligatori e seleziona un veicolo valido.', 'error');
+        return;
+    }
+
+    if (discordNickname.length < 2 || discordNickname.length > 40) {
+        setOrderStatus('Inserisci un nickname Discord valido.', 'error');
+        return;
+    }
+
+    const lastOrderAt = Number(localStorage.getItem('charmingCarLastOrderAt') || 0);
+    const secondsSinceLastOrder = Math.floor((Date.now() - lastOrderAt) / 1000);
+    if (secondsSinceLastOrder < 20) {
+        setOrderStatus(`Attendi ${20 - secondsSinceLastOrder} secondi prima di inviare un altro ordine.`, 'error');
+        return;
+    }
+
+    const orderCode = `CC-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+    const clean = value => String(value).replace(/@/g, '@\u200b').slice(0, 1000);
 
     const payload = {
+        username: 'Charming Car • Ordini',
+        allowed_mentions: { parse: [] },
         embeds: [{
-            title: "💎 NUOVA RICHIESTA DI CONSULENZA IMPORT",
+            title: '🚘 NUOVO ORDINE VEICOLO',
+            description: 'Un cliente ha richiesto un veicolo dal catalogo di Charming Car.',
             color: 13938487,
             fields: [
-                { name: "👤 Cliente", value: name, inline: true },
-                { name: "📞 Telefono", value: phone, inline: true },
-                { name: "🏠 Indirizzo", value: address, inline: false },
-                { name: "🚗 Veicolo Interessato", value: brand.toUpperCase() + " " + model, inline: true },
-                { name: "📅 Azione", value: "Fissare Incontro per Prezzo & Dettagli", inline: true }
+                { name: '🧾 Codice ordine', value: clean(orderCode), inline: false },
+                { name: '👤 Cliente IC', value: clean(name), inline: true },
+                { name: '📞 Telefono IC', value: clean(phone), inline: true },
+                { name: '💬 Discord da contattare', value: clean(discordNickname), inline: false },
+                { name: '🚗 Veicolo', value: clean(`${brand} ${model}`), inline: true },
+                { name: '💵 Prezzo di listino', value: clean(car.p), inline: true },
+                { name: '📝 Note', value: clean(notes || 'Nessuna nota'), inline: false },
+                { name: '📌 Azione concessionario', value: 'Ordinare il veicolo e contattare manualmente il cliente su Discord quando sarà disponibile per il ritiro.', inline: false }
             ],
-            footer: { text: "CarsAroundTheWorld - Luxury Import Division" },
-            timestamp: new Date()
+            footer: { text: 'Charming Car • Charming Full RP' },
+            timestamp: new Date().toISOString()
         }]
     };
 
+    submitButton.disabled = true;
+    submitButton.textContent = 'Invio ordine in corso...';
+    setOrderStatus('', '');
+
     try {
-        const res = await fetch(webhook, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-        if(res.ok) {
-            alert("Informazioni inviate! Simeon visionerà i tuoi dati e ti contatterà presto.");
-            closePreventivo();
-        } else { alert("Errore del server. Riprova."); }
-    } catch(e) { alert("Errore di connessione."); }
+        const response = await fetch(DISCORD_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            let errorMessage = 'Discord non ha accettato l’ordine.';
+            try {
+                const data = await response.json();
+                if (data && data.message) errorMessage = data.message;
+            } catch (_) {}
+            throw new Error(errorMessage);
+        }
+
+        localStorage.setItem('charmingCarLastOrderAt', String(Date.now()));
+        setOrderStatus(`Ordine inviato correttamente. Codice: ${orderCode}. Lo staff ti contatterà su Discord quando il veicolo arriverà.`, 'success');
+        document.getElementById('order-notes').value = '';
+    } catch (error) {
+        setOrderStatus(error.message || 'Errore durante l’invio dell’ordine al concessionario.', 'error');
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Invia ordine a Charming Car';
+    }
 }
 
 const grid = document.getElementById('mainGrid');
@@ -434,14 +616,29 @@ function showBrands() {
     setTimeout(animate, 100);
 }
 
+function createCarCard(brand, car) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+        <span>${escapeHtml(brand.toUpperCase())}</span>
+        <h3>${escapeHtml(car.m)}</h3>
+        <span class="price">${escapeHtml(car.p)}</span>
+        <button class="card-order-btn" type="button">Ordina veicolo</button>
+    `;
+    card.querySelector('.card-order-btn').addEventListener('click', (event) => {
+        event.stopPropagation();
+        openOrderModal(brand, car.m);
+    });
+    return card;
+}
+
 function showCars(brand) {
     grid.innerHTML = ''; backBtn.style.display = 'inline-block';
-    carData[brand].sort((a,b) => a.m.localeCompare(b.m)).forEach(c => {
-        const card = document.createElement('div'); card.className = 'card';
-        card.innerHTML = `<span>${brand.toUpperCase()}</span><h3>${c.m}</h3><span class="price">${c.p}</span>`;
-        grid.appendChild(card);
+    carData[brand].slice().sort((a,b) => a.m.localeCompare(b.m)).forEach(c => {
+        grid.appendChild(createCarCard(brand, c));
     });
-    window.scrollTo({top: 0, behavior: 'smooth'}); setTimeout(animate, 100);
+    document.querySelector('.catalogue-section').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(animate, 100);
 }
 
 function handleSearch() {
@@ -451,9 +648,7 @@ function handleSearch() {
     Object.keys(carData).forEach(b => {
         carData[b].forEach(c => {
             if(c.m.toLowerCase().includes(q) || b.toLowerCase().includes(q)) {
-                const card = document.createElement('div'); card.className = 'card';
-                card.innerHTML = `<span>${b.toUpperCase()}</span><h3>${c.m}</h3><span class="price">${c.p}</span>`;
-                grid.appendChild(card);
+                grid.appendChild(createCarCard(b, c));
             }
         });
     });
@@ -469,6 +664,8 @@ function animate() {
 
 window.addEventListener('scroll', animate);
 populateBrandMenu();
+populateOrderBrands();
+updateOrderModels();
 showBrands();
 </script>
 
