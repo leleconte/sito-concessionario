@@ -309,7 +309,7 @@
     </div>
     
     <div class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="CERCA VEICOLO O CATEGORIA..." oninput="handleSearch()">
+        <input type="text" id="searchInput" class="search-input" placeholder="CERCA MODELLO O MARCHIO..." oninput="handleSearch()">
     </div>
 
     <div class="nav-links">
@@ -324,7 +324,7 @@
     <ul class="menu-list">
         <li class="clickable" onclick="openOrderModal()">🚘 ORDINA UN VEICOLO</li>
         <li class="clickable" onclick="scrollToCatalogue()">📖 CATALOGO VEICOLI</li>
-        <li style="color: var(--gold); margin-top: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; font-weight: 700;">ESPLORA CATEGORIE</li>
+        <li style="color: var(--gold); margin-top: 20px; border-bottom: 1px solid #222; padding-bottom: 10px; font-weight: 700;">ESPLORA MARCHI</li>
         <div id="brandMenuList"></div>
     </ul>
 </div>
@@ -345,7 +345,7 @@
             <div class="form-group"><label>NOME E COGNOME (IC)</label><input type="text" id="order-name" class="form-input" maxlength="80" placeholder="Nome Cognome"></div>
             <div class="form-group"><label>NUMERO DI TELEFONO (IC)</label><input type="text" id="order-phone" class="form-input" maxlength="40" placeholder="555-1234"></div>
             <div class="form-group full"><label>NICKNAME DISCORD</label><input type="text" id="order-discord-nickname" class="form-input" maxlength="40" autocomplete="off" placeholder="es. @leleconte oppure leleconte"></div>
-            <div class="form-group"><label>CATEGORIA</label><select id="order-brand" class="form-input" onchange="updateOrderModels()"></select></div>
+            <div class="form-group"><label>MARCHIO</label><select id="order-brand" class="form-input" onchange="updateOrderModels()"></select></div>
             <div class="form-group"><label>MODELLO</label><select id="order-model" class="form-input" onchange="updateOrderSelection()"></select></div>
             <div class="form-group full"><label>NOTE PER IL CONCESSIONARIO (FACOLTATIVE)</label><textarea id="order-notes" class="form-input" maxlength="500" placeholder="Colore desiderato, informazioni aggiuntive..."></textarea></div>
         </div>
@@ -375,891 +375,959 @@
 <script>
 // Car Data (Mantenuto identico)
 const carData = {
-    "AUTO": [
+    "Albany": [
         {
-            "id": "auto-001",
-            "m": "ALBANY BUCCANER",
+            "id": "veh-001",
+            "m": "BUCCANER",
             "p": "$30.000"
         },
         {
-            "id": "auto-002",
-            "m": "SENTINEL GTS",
-            "p": "$100.000"
+            "id": "veh-002",
+            "m": "Cavalcade Xl",
+            "p": "$85.000"
         },
         {
-            "id": "auto-003",
-            "m": "OVERFLOD SUZUME",
-            "p": "$3.000.000"
-        },
-        {
-            "id": "auto-004",
-            "m": "ANNIS EUROS",
-            "p": "$60.000"
-        },
-        {
-            "id": "auto-005",
-            "m": "ANNIS HARDY",
-            "p": "$45.000"
-        },
-        {
-            "id": "auto-006",
-            "m": "ANNIS REMUS",
-            "p": "$50.000"
-        },
-        {
-            "id": "auto-007",
-            "m": "GROTTI ITALY RSX",
-            "p": "$2.500.000"
-        },
-        {
-            "id": "auto-008",
-            "m": "PARAGON R",
-            "p": "$800.000"
-        },
-        {
-            "id": "auto-009",
-            "m": "COQUETTE CLASSIC",
-            "p": "$250.000"
-        },
-        {
-            "id": "auto-010",
-            "m": "VENUS JUBILEE",
-            "p": "$1.500.000"
-        },
-        {
-            "id": "auto-011",
-            "m": "ENUS STAFFORD",
-            "p": "$150.000"
-        },
-        {
-            "id": "auto-012",
-            "m": "REBLA GTS",
-            "p": "$200.000"
-        },
-        {
-            "id": "auto-013",
-            "m": "COGNISCENTI",
-            "p": "$35.000"
-        },
-        {
-            "id": "auto-014",
-            "m": "SUPER DIAMOND",
-            "p": "$250.000"
-        },
-        {
-            "id": "auto-015",
-            "m": "WINDSOR",
-            "p": "$350.000"
-        },
-        {
-            "id": "auto-016",
-            "m": "VIGERO ZX",
-            "p": "$175.000"
-        },
-        {
-            "id": "auto-017",
-            "m": "OCELOT JUGULAR",
-            "p": "$80.000"
-        },
-        {
-            "id": "auto-018",
-            "m": "MAIBATSU PENUMBRA FF",
-            "p": "$60.000"
-        },
-        {
-            "id": "auto-019",
-            "m": "COIL RAIDEN",
-            "p": "$140.000"
-        },
-        {
-            "id": "auto-020",
-            "m": "PFISTER COMET",
-            "p": "$100.000"
-        },
-        {
-            "id": "auto-021",
-            "m": "JESTER CLASSIC",
-            "p": "$160.000"
-        },
-        {
-            "id": "auto-022",
-            "m": "UBERMACHT CYPHER",
-            "p": "$180.000"
-        },
-        {
-            "id": "auto-023",
-            "m": "OBEY OMNIS E-GT",
-            "p": "$550.000"
-        },
-        {
-            "id": "auto-024",
-            "m": "BENEFACTOR SCHLAGEN",
-            "p": "$1.400.000"
-        },
-        {
-            "id": "auto-025",
-            "m": "BANSHEE 900R",
-            "p": "$60.000"
-        },
-        {
-            "id": "auto-026",
-            "m": "OBEY 8F DRAFTER",
-            "p": "$250.000"
-        },
-        {
-            "id": "auto-027",
-            "m": "KHAMELION",
-            "p": "$300.000"
-        },
-        {
-            "id": "auto-028",
-            "m": "LAMPADATI KOMODA",
-            "p": "$250.000"
-        },
-        {
-            "id": "auto-029",
-            "m": "KARIN CALICO GTF",
-            "p": "$30.000"
-        },
-        {
-            "id": "auto-030",
-            "m": "BF CLUB",
-            "p": "$20.000"
-        },
-        {
-            "id": "auto-031",
-            "m": "TULIP",
-            "p": "$15.000"
-        },
-        {
-            "id": "auto-032",
-            "m": "WENNY ISSI",
-            "p": "$20.000"
-        },
-        {
-            "id": "auto-033",
-            "m": "WARRENER",
-            "p": "$20.000"
-        },
-        {
-            "id": "auto-034",
-            "m": "KARIN SULTAN",
-            "p": "$65.000"
-        },
-        {
-            "id": "auto-035",
-            "m": "BRIOSO 300",
-            "p": "$10.000"
-        },
-        {
-            "id": "auto-036",
-            "m": "RETINUE",
-            "p": "$17.000"
-        },
-        {
-            "id": "auto-037",
-            "m": "DINKA KANJO SJ",
-            "p": "$20.000"
-        },
-        {
-            "id": "auto-038",
-            "m": "KARIN FUTO",
-            "p": "$25.000"
-        },
-        {
-            "id": "auto-039",
-            "m": "ISSI CLASSIC",
-            "p": "$10.000"
-        },
-        {
-            "id": "auto-040",
-            "m": "LAMPADATI CASCO",
-            "p": "$30.000"
-        },
-        {
-            "id": "auto-041",
-            "m": "SENTINEL XS",
-            "p": "$15.000"
-        },
-        {
-            "id": "auto-042",
-            "m": "BLISTA KANJO",
-            "p": "$25.000"
-        },
-        {
-            "id": "auto-043",
-            "m": "DINKA POSTLUDE",
-            "p": "$30.000"
-        },
-        {
-            "id": "auto-044",
-            "m": "BENEFACTOR SCHWATZER",
-            "p": "$50.000"
-        },
-        {
-            "id": "auto-045",
-            "m": "ALBANY V-STR",
+            "id": "veh-003",
+            "m": "V-STR",
             "p": "$120.000"
-        },
+        }
+    ],
+    "Annis": [
         {
-            "id": "auto-046",
-            "m": "VAPID PEYOTE CUSTOM",
-            "p": "$30.000"
-        },
-        {
-            "id": "auto-047",
-            "m": "SENTINEL CLASSIC",
-            "p": "$85.000"
-        },
-        {
-            "id": "auto-048",
-            "m": "KARIN 190Z",
-            "p": "$35.000"
-        },
-        {
-            "id": "auto-049",
-            "m": "LAMPADATI CINQUEMILA",
-            "p": "$110.000"
-        },
-        {
-            "id": "auto-050",
-            "m": "BUFFALO S",
-            "p": "$40.000"
-        },
-        {
-            "id": "auto-051",
-            "m": "DINKA SUGOI",
-            "p": "$110.000"
-        },
-        {
-            "id": "auto-052",
-            "m": "FLASH GT",
-            "p": "$70.000"
-        },
-        {
-            "id": "auto-053",
-            "m": "KARIN SULTAN RS CLASSIC",
-            "p": "$75.000"
-        },
-        {
-            "id": "auto-054",
-            "m": "UBERMACHT RHINEHART",
-            "p": "$85.000"
-        },
-        {
-            "id": "auto-055",
-            "m": "OBEY TAILGETER S",
-            "p": "$90.000"
-        },
-        {
-            "id": "auto-056",
-            "m": "KARIN SULTAN RS CLASSIC 5 PORTE",
-            "p": "$135.000"
-        },
-        {
-            "id": "auto-057",
-            "m": "PEGASSI TOROS",
-            "p": "$550.000"
-        },
-        {
-            "id": "auto-058",
-            "m": "ANNIS 300R",
+            "id": "veh-004",
+            "m": "300R",
             "p": "$180.000"
         },
         {
-            "id": "auto-059",
-            "m": "OCELOT PARIAH",
-            "p": "$250.000"
-        },
-        {
-            "id": "auto-060",
-            "m": "TRUFFADE ADDER",
-            "p": "$2.000.000"
-        },
-        {
-            "id": "auto-061",
-            "m": "PFISTER COMET CABRIO S2",
-            "p": "$320.000"
-        },
-        {
-            "id": "auto-062",
-            "m": "GROTTI TURISMO CLASSIC",
-            "p": "$2.000.000"
-        },
-        {
-            "id": "auto-063",
-            "m": "DOMINATOR GTX",
-            "p": "$130.000"
-        },
-        {
-            "id": "auto-064",
-            "m": "GALLIVANTER BALLER",
-            "p": "$125.000"
-        },
-        {
-            "id": "auto-065",
-            "m": "KARIN VIVANITE",
-            "p": "$55.000"
-        },
-        {
-            "id": "auto-066",
-            "m": "BALLER ST-D",
-            "p": "$190.000"
-        },
-        {
-            "id": "auto-067",
-            "m": "OBEY I-WAGEN",
-            "p": "$95.000"
-        },
-        {
-            "id": "auto-068",
-            "m": "EMPEROR VECTRE",
-            "p": "$85.000"
-        },
-        {
-            "id": "auto-069",
-            "m": "ANNIS ZR350",
-            "p": "$95.000"
-        },
-        {
-            "id": "auto-070",
-            "m": "DINKA JESTER RR",
-            "p": "$85.000"
-        },
-        {
-            "id": "auto-071",
-            "m": "IMPONTE NIGTHSHADE",
-            "p": "$45.000"
-        },
-        {
-            "id": "auto-072",
-            "m": "CHEETAH CLASSIC GROTTI",
-            "p": "$230.000"
-        },
-        {
-            "id": "auto-073",
-            "m": "OBEY OMNIS",
-            "p": "$135.000"
-        },
-        {
-            "id": "auto-074",
-            "m": "VAPID ALEUTIAN",
-            "p": "$110.000"
-        },
-        {
-            "id": "auto-075",
-            "m": "GAUNTLET HELLFIRE",
-            "p": "$65.000"
-        },
-        {
-            "id": "auto-076",
-            "m": "PFISTER ASTRON",
-            "p": "$150.000"
-        },
-        {
-            "id": "auto-077",
-            "m": "KARIN ASTEROPE GZ",
-            "p": "$15.000"
-        },
-        {
-            "id": "auto-078",
-            "m": "PFISTER COMET S2",
-            "p": "$250.000"
-        },
-        {
-            "id": "auto-079",
-            "m": "DOMINATOR GT",
-            "p": "$70.000"
-        },
-        {
-            "id": "auto-080",
-            "m": "MAXWELL ASBO",
-            "p": "$5.000"
-        },
-        {
-            "id": "auto-081",
-            "m": "PFISTER 811",
-            "p": "$1.800.000"
-        },
-        {
-            "id": "auto-082",
-            "m": "PFISTER NEON",
-            "p": "$350.000"
-        },
-        {
-            "id": "auto-083",
-            "m": "OBEY 10F",
-            "p": "$600.000"
-        },
-        {
-            "id": "auto-084",
-            "m": "TRUFFADE NERO",
-            "p": "$2.250.000"
-        },
-        {
-            "id": "auto-085",
-            "m": "VAPID DOMINATOR ASP",
-            "p": "$75.000"
-        },
-        {
-            "id": "auto-086",
-            "m": "BRAVADO BUFFALO STX",
-            "p": "$80.000"
-        },
-        {
-            "id": "auto-087",
-            "m": "GAUNTLET",
-            "p": "$40.000"
-        },
-        {
-            "id": "auto-088",
-            "m": "CAVALCADE XL",
-            "p": "$85.000"
-        },
-        {
-            "id": "auto-089",
-            "m": "ENUS DEITY",
-            "p": "$300.000"
-        },
-        {
-            "id": "auto-090",
-            "m": "BRAVADO BISON",
-            "p": "$25.000"
-        },
-        {
-            "id": "auto-091",
-            "m": "DEWBUCHEE CHAMPION",
-            "p": "$350.000"
-        },
-        {
-            "id": "auto-092",
-            "m": "IMPONTE DUKES",
-            "p": "$20.000"
-        },
-        {
-            "id": "auto-093",
-            "m": "OBEY 9F CABRIO",
-            "p": "$45.000"
-        },
-        {
-            "id": "auto-094",
-            "m": "WILLARD EUDORA",
-            "p": "$90.000"
-        },
-        {
-            "id": "auto-095",
-            "m": "PFISTER GROWLER",
-            "p": "$125.000"
-        },
-        {
-            "id": "auto-096",
-            "m": "DECLASSE VIGERO",
-            "p": "$20.000"
-        },
-        {
-            "id": "auto-097",
-            "m": "BESTIA GTS",
-            "p": "$550.000"
-        },
-        {
-            "id": "auto-098",
-            "m": "GROTTI ITALY GTO",
-            "p": "$1.650.000"
-        },
-        {
-            "id": "auto-099",
-            "m": "TRUFFADE THRAX",
-            "p": "$5.000.000"
-        },
-        {
-            "id": "auto-100",
-            "m": "GROTTI TURISMO OMAGGIO",
-            "p": "$2.700.000"
-        },
-        {
-            "id": "auto-101",
-            "m": "GROTTI ITALY GTO STINGER",
-            "p": "$2.500.000"
-        },
-        {
-            "id": "auto-102",
-            "m": "PEGASSI TEMPESTA",
-            "p": "$1.500.000"
-        },
-        {
-            "id": "auto-103",
-            "m": "PEGASSI IGNUS",
-            "p": "$3.500.000"
-        },
-        {
-            "id": "auto-104",
-            "m": "BENEFACTOR KRIEGER",
-            "p": "$2.700.000"
-        },
-        {
-            "id": "auto-105",
-            "m": "GROTTI FURIA",
-            "p": "$800.000"
-        },
-        {
-            "id": "auto-106",
-            "m": "PROGEN T-20",
-            "p": "$700.000"
-        },
-        {
-            "id": "auto-107",
-            "m": "BANSHEE GTS",
-            "p": "$1.400.000"
-        },
-        {
-            "id": "auto-108",
-            "m": "TORERO XO",
-            "p": "$2.000.000"
-        },
-        {
-            "id": "auto-109",
-            "m": "OVERFLOD PIPISTRELLO",
-            "p": "$2.500.000"
-        },
-        {
-            "id": "auto-110",
-            "m": "UBERMACHT NIOBE",
-            "p": "$1.000.000"
-        },
-        {
-            "id": "auto-111",
-            "m": "OCELOT VIRTUE",
-            "p": "$2.300.000"
-        },
-        {
-            "id": "auto-112",
-            "m": "OVERFLOD ENTITY MT",
-            "p": "$2.700.000"
-        },
-        {
-            "id": "auto-113",
-            "m": "BENEFACTOR SM-722",
-            "p": "$1.500.000"
-        },
-        {
-            "id": "auto-114",
-            "m": "LAMPADATI CORSITA",
-            "p": "$900.000"
-        },
-        {
-            "id": "auto-115",
-            "m": "OVERFLOD ZENO",
-            "p": "$1.800.000"
-        },
-        {
-            "id": "auto-116",
-            "m": "ENUS PARAGON S",
-            "p": "$1.400.000"
-        },
-        {
-            "id": "auto-117",
-            "m": "ANNIS ZR-350",
-            "p": "$300.000"
-        },
-        {
-            "id": "auto-118",
-            "m": "LAMPADATI TIGON",
-            "p": "$1.400.000"
-        },
-        {
-            "id": "auto-119",
-            "m": "INVETERO COQUETTE D10",
-            "p": "$700.000"
-        },
-        {
-            "id": "auto-120",
-            "m": "OCELOT LOCUST",
-            "p": "$600.000"
-        },
-        {
-            "id": "auto-121",
-            "m": "PROGEN EMERUS",
-            "p": "$2.500.000"
-        },
-        {
-            "id": "auto-122",
-            "m": "VYSSER NEO",
-            "p": "$1.000.000"
-        },
-        {
-            "id": "auto-123",
-            "m": "PRINCIPE DEVASTATE EIGHT",
-            "p": "$5.000.000"
-        },
-        {
-            "id": "auto-124",
-            "m": "OVERFLOD TYRANT",
-            "p": "$1.700.000"
-        },
-        {
-            "id": "auto-125",
-            "m": "PEGASSI TEZERACT",
-            "p": "$5.000.000"
-        },
-        {
-            "id": "auto-126",
-            "m": "OVERFLOD ENTITY XXR",
-            "p": "$1.900.000"
-        },
-        {
-            "id": "auto-127",
-            "m": "CHEVAL TAIPAN",
-            "p": "$1.200.000"
-        },
-        {
-            "id": "auto-128",
-            "m": "OVERFLOD AUTARCH",
-            "p": "$1.400.000"
-        },
-        {
-            "id": "auto-129",
-            "m": "COIL CYCLONE",
-            "p": "$1.100.000"
-        },
-        {
-            "id": "auto-130",
-            "m": "GROTTI VISIONE",
-            "p": "$1.800.000"
-        },
-        {
-            "id": "auto-131",
-            "m": "DEWBAUCHEE VAGNER",
-            "p": "$900.000"
-        },
-        {
-            "id": "auto-132",
-            "m": "OCELOT XA-21",
-            "p": "$1.800.000"
-        },
-        {
-            "id": "auto-133",
-            "m": "PEGASSI REAPER",
-            "p": "$900.000"
-        },
-        {
-            "id": "auto-134",
-            "m": "GROTTI X80 PROTO",
-            "p": "$3.000.000"
-        },
-        {
-            "id": "auto-135",
-            "m": "PEGASSI OSIRIS",
-            "p": "$1.250.000"
-        },
-        {
-            "id": "auto-136",
-            "m": "PEGASSI ZENTORNO",
-            "p": "$600.000"
-        },
-        {
-            "id": "auto-137",
-            "m": "GROTTI TURISMO R",
-            "p": "$300.000"
-        },
-        {
-            "id": "auto-138",
-            "m": "PEGASSI ZORUSSO",
-            "p": "$600.000"
-        },
-        {
-            "id": "auto-139",
-            "m": "UBERMACHT SC1",
-            "p": "$500.000"
-        },
-        {
-            "id": "auto-140",
-            "m": "PANTO",
-            "p": "$5.000"
-        },
-        {
-            "id": "auto-141",
-            "m": "ELEGY RH8",
+            "id": "veh-005",
+            "m": "Elegy RH8",
             "p": "VEICOLO INIZIALE"
         },
         {
-            "id": "auto-142",
-            "m": "DEWBAUCHEE RAPID GT",
-            "p": "$125.000"
+            "id": "veh-006",
+            "m": "EUROS",
+            "p": "$60.000"
         },
         {
-            "id": "auto-143",
-            "m": "TERMINUS",
-            "p": "$95.000"
+            "id": "veh-007",
+            "m": "HARDY",
+            "p": "$45.000"
         },
         {
-            "id": "auto-144",
-            "m": "ANNIS REMUS",
+            "id": "veh-008",
+            "m": "REMUS",
             "p": "$30.000"
         },
         {
-            "id": "auto-145",
-            "m": "KARIN KURUMA",
-            "p": "$35.000"
+            "id": "veh-009",
+            "m": "REMUS",
+            "p": "$50.000"
         },
         {
-            "id": "auto-146",
-            "m": "KARIN EVERON RS",
-            "p": "$167.000"
+            "id": "veh-010",
+            "m": "ZR-350",
+            "p": "$300.000"
         },
         {
-            "id": "auto-147",
-            "m": "VAPID CARACARA 4X4",
-            "p": "$150.000"
+            "id": "veh-011",
+            "m": "ZR350",
+            "p": "$95.000"
         }
     ],
-    "MOTO DA STRADA": [
+    "Benefactor": [
         {
-            "id": "moto1-001",
-            "m": "PEGASSI BATI 801",
-            "p": "$17.000"
+            "id": "veh-012",
+            "m": "KRIEGER",
+            "p": "$2.700.000"
         },
         {
-            "id": "moto1-002",
-            "m": "PEGASSI BATI 801RR",
-            "p": "$20.000"
-        },
-        {
-            "id": "moto1-003",
-            "m": "DINKA DOUBLE-T",
-            "p": "$15.000"
-        },
-        {
-            "id": "moto1-004",
-            "m": "DINKA AKUMA",
-            "p": "$13.000"
-        },
-        {
-            "id": "moto1-005",
-            "m": "CARBON RS",
-            "p": "$20.000"
-        },
-        {
-            "id": "moto1-006",
-            "m": "PEGASSI RUFFIAN",
-            "p": "$10.000"
-        }
-    ],
-    "MOTO SPORTIVE/RACING": [
-        {
-            "id": "moto2-001",
-            "m": "SHITZU HAKUCHOU",
-            "p": "$27.000"
-        },
-        {
-            "id": "moto2-002",
-            "m": "SHITZU HAKUCHOU DRUG",
-            "p": "$35.000"
-        },
-        {
-            "id": "moto2-003",
-            "m": "NAGASAKI SHOTARO",
-            "p": "$55.000"
-        },
-        {
-            "id": "moto2-004",
-            "m": "SHITZU DEFILER",
-            "p": "$25.000"
-        },
-        {
-            "id": "moto2-005",
-            "m": "PEGASSI VORTEX",
-            "p": "$20.000"
-        },
-        {
-            "id": "moto2-006",
-            "m": "NAGASAKI SHINOBI",
-            "p": "$45.000"
-        }
-    ],
-    "MOTO DA CITTÀ/SCOOTER": [
-        {
-            "id": "moto3-001",
-            "m": "PEGASSI FAGGIO SPORT",
+            "id": "veh-013",
+            "m": "Panto",
             "p": "$5.000"
         },
         {
-            "id": "moto3-002",
-            "m": "PEGASSI FAGGIO MOD",
-            "p": "$2.500"
+            "id": "veh-014",
+            "m": "SCHLAGEN",
+            "p": "$1.400.000"
         },
         {
-            "id": "moto3-003",
-            "m": "PEGASSI FAGGIO CLASSIC",
-            "p": "$2.000"
+            "id": "veh-015",
+            "m": "SCHWATZER",
+            "p": "$50.000"
         },
         {
-            "id": "moto3-004",
-            "m": "NEMESIS PRINCIPE",
-            "p": "$8.000"
+            "id": "veh-016",
+            "m": "SM-722",
+            "p": "$1.500.000"
         }
     ],
-    "CHOPPER / BIKER GANG": [
+    "BF": [
         {
-            "id": "moto4-001",
-            "m": "WESTERN NIGTHBLADE",
-            "p": "$20.000"
-        },
-        {
-            "id": "moto4-002",
-            "m": "WESTERN ZOMBIE BOBBER",
-            "p": "$17.000"
-        },
-        {
-            "id": "moto4-003",
-            "m": "WESTERN ZOMBIE CHOPPER",
-            "p": "$15.000"
-        },
-        {
-            "id": "moto4-004",
-            "m": "LCC AVARUS",
-            "p": "$14.000"
-        },
-        {
-            "id": "moto4-005",
-            "m": "LCC HEXER",
-            "p": "$12.000"
-        },
-        {
-            "id": "moto4-006",
-            "m": "WESTERN DAEMON",
-            "p": "$13.000"
-        }
-    ],
-    "ENDURO / MOTARD / FUORISTRADA": [
-        {
-            "id": "moto5-001",
-            "m": "MAIBATSU SANCHEZ LIVERY",
-            "p": "$7.000"
-        },
-        {
-            "id": "moto5-002",
-            "m": "DINKA ENDURO",
-            "p": "$8.000"
-        },
-        {
-            "id": "moto5-003",
-            "m": "MAIBATSU MANCHEZ SCOUT",
-            "p": "$12.000"
-        },
-        {
-            "id": "moto5-004",
-            "m": "MAIBATSU MANCHEZ",
-            "p": "$9.000"
-        },
-        {
-            "id": "moto5-005",
-            "m": "BF400",
+            "id": "veh-017",
+            "m": "Bf400",
             "p": "$10.000"
         },
         {
-            "id": "moto5-006",
-            "m": "STREET BLAZER",
+            "id": "veh-018",
+            "m": "CLUB",
             "p": "$20.000"
+        }
+    ],
+    "Bravado": [
+        {
+            "id": "veh-019",
+            "m": "Banshee 900R",
+            "p": "$60.000"
+        },
+        {
+            "id": "veh-020",
+            "m": "Banshee GTS",
+            "p": "$1.400.000"
+        },
+        {
+            "id": "veh-021",
+            "m": "BISON",
+            "p": "$25.000"
+        },
+        {
+            "id": "veh-022",
+            "m": "Buffalo S",
+            "p": "$40.000"
+        },
+        {
+            "id": "veh-023",
+            "m": "BUFFALO STX",
+            "p": "$80.000"
+        },
+        {
+            "id": "veh-024",
+            "m": "Gauntlet",
+            "p": "$40.000"
+        },
+        {
+            "id": "veh-025",
+            "m": "Gauntlet Hellfire",
+            "p": "$65.000"
+        }
+    ],
+    "Canis": [
+        {
+            "id": "veh-026",
+            "m": "Terminus",
+            "p": "$95.000"
+        }
+    ],
+    "Cheval": [
+        {
+            "id": "veh-027",
+            "m": "TAIPAN",
+            "p": "$1.200.000"
+        }
+    ],
+    "Coil": [
+        {
+            "id": "veh-028",
+            "m": "CYCLONE",
+            "p": "$1.100.000"
+        },
+        {
+            "id": "veh-029",
+            "m": "RAIDEN",
+            "p": "$140.000"
+        }
+    ],
+    "Declasse": [
+        {
+            "id": "veh-030",
+            "m": "Tulip",
+            "p": "$15.000"
+        },
+        {
+            "id": "veh-031",
+            "m": "VIGERO",
+            "p": "$20.000"
+        },
+        {
+            "id": "veh-032",
+            "m": "Vigero Zx",
+            "p": "$175.000"
+        }
+    ],
+    "Dewbauchee": [
+        {
+            "id": "veh-033",
+            "m": "Champion",
+            "p": "$350.000"
+        },
+        {
+            "id": "veh-034",
+            "m": "RAPID GT",
+            "p": "$125.000"
+        },
+        {
+            "id": "veh-035",
+            "m": "VAGNER",
+            "p": "$900.000"
+        }
+    ],
+    "Dinka": [
+        {
+            "id": "veh-036",
+            "m": "AKUMA",
+            "p": "$13.000"
+        },
+        {
+            "id": "veh-037",
+            "m": "Blista Kanjo",
+            "p": "$25.000"
+        },
+        {
+            "id": "veh-038",
+            "m": "DOUBLE-T",
+            "p": "$15.000"
+        },
+        {
+            "id": "veh-039",
+            "m": "ENDURO",
+            "p": "$8.000"
+        },
+        {
+            "id": "veh-040",
+            "m": "Jester Classic",
+            "p": "$160.000"
+        },
+        {
+            "id": "veh-041",
+            "m": "JESTER RR",
+            "p": "$85.000"
+        },
+        {
+            "id": "veh-042",
+            "m": "KANJO SJ",
+            "p": "$20.000"
+        },
+        {
+            "id": "veh-043",
+            "m": "POSTLUDE",
+            "p": "$30.000"
+        },
+        {
+            "id": "veh-044",
+            "m": "SUGOI",
+            "p": "$110.000"
+        }
+    ],
+    "Emperor": [
+        {
+            "id": "veh-045",
+            "m": "VECTRE",
+            "p": "$85.000"
+        }
+    ],
+    "Enus": [
+        {
+            "id": "veh-046",
+            "m": "Cogniscenti",
+            "p": "$35.000"
+        },
+        {
+            "id": "veh-047",
+            "m": "DEITY",
+            "p": "$300.000"
+        },
+        {
+            "id": "veh-048",
+            "m": "Jubilee",
+            "p": "$1.500.000"
+        },
+        {
+            "id": "veh-049",
+            "m": "Paragon R",
+            "p": "$800.000"
+        },
+        {
+            "id": "veh-050",
+            "m": "PARAGON S",
+            "p": "$1.400.000"
+        },
+        {
+            "id": "veh-051",
+            "m": "STAFFORD",
+            "p": "$150.000"
+        },
+        {
+            "id": "veh-052",
+            "m": "Super Diamond",
+            "p": "$250.000"
+        },
+        {
+            "id": "veh-053",
+            "m": "Windsor",
+            "p": "$350.000"
+        }
+    ],
+    "Gallivanter": [
+        {
+            "id": "veh-054",
+            "m": "BALLER",
+            "p": "$125.000"
+        },
+        {
+            "id": "veh-055",
+            "m": "Baller St-D",
+            "p": "$190.000"
+        }
+    ],
+    "Grotti": [
+        {
+            "id": "veh-056",
+            "m": "Bestia Gts",
+            "p": "$550.000"
+        },
+        {
+            "id": "veh-057",
+            "m": "Brioso 300",
+            "p": "$10.000"
+        },
+        {
+            "id": "veh-058",
+            "m": "Cheetah Classic",
+            "p": "$230.000"
+        },
+        {
+            "id": "veh-059",
+            "m": "FURIA",
+            "p": "$800.000"
+        },
+        {
+            "id": "veh-060",
+            "m": "ITALY GTO",
+            "p": "$1.650.000"
+        },
+        {
+            "id": "veh-061",
+            "m": "ITALY GTO STINGER",
+            "p": "$2.500.000"
+        },
+        {
+            "id": "veh-062",
+            "m": "ITALY RSX",
+            "p": "$2.500.000"
+        },
+        {
+            "id": "veh-063",
+            "m": "TURISMO CLASSIC",
+            "p": "$2.000.000"
+        },
+        {
+            "id": "veh-064",
+            "m": "TURISMO OMAGGIO",
+            "p": "$2.700.000"
+        },
+        {
+            "id": "veh-065",
+            "m": "TURISMO R",
+            "p": "$300.000"
+        },
+        {
+            "id": "veh-066",
+            "m": "VISIONE",
+            "p": "$1.800.000"
+        },
+        {
+            "id": "veh-067",
+            "m": "X80 PROTO",
+            "p": "$3.000.000"
+        }
+    ],
+    "Hijak": [
+        {
+            "id": "veh-068",
+            "m": "Khamelion",
+            "p": "$300.000"
+        }
+    ],
+    "Imponte": [
+        {
+            "id": "veh-069",
+            "m": "DUKES",
+            "p": "$20.000"
+        },
+        {
+            "id": "veh-070",
+            "m": "NIGTHSHADE",
+            "p": "$45.000"
+        }
+    ],
+    "Invetero": [
+        {
+            "id": "veh-071",
+            "m": "Coquette Classic",
+            "p": "$250.000"
+        },
+        {
+            "id": "veh-072",
+            "m": "COQUETTE D10",
+            "p": "$700.000"
+        }
+    ],
+    "Karin": [
+        {
+            "id": "veh-073",
+            "m": "190Z",
+            "p": "$35.000"
+        },
+        {
+            "id": "veh-074",
+            "m": "ASTEROPE GZ",
+            "p": "$15.000"
+        },
+        {
+            "id": "veh-075",
+            "m": "CALICO GTF",
+            "p": "$30.000"
+        },
+        {
+            "id": "veh-076",
+            "m": "EVERON RS",
+            "p": "$167.000"
+        },
+        {
+            "id": "veh-077",
+            "m": "FUTO",
+            "p": "$25.000"
+        },
+        {
+            "id": "veh-078",
+            "m": "KURUMA",
+            "p": "$35.000"
+        },
+        {
+            "id": "veh-079",
+            "m": "SULTAN",
+            "p": "$65.000"
+        },
+        {
+            "id": "veh-080",
+            "m": "SULTAN RS CLASSIC",
+            "p": "$75.000"
+        },
+        {
+            "id": "veh-081",
+            "m": "SULTAN RS CLASSIC 5 PORTE",
+            "p": "$135.000"
+        },
+        {
+            "id": "veh-082",
+            "m": "VIVANITE",
+            "p": "$55.000"
+        }
+    ],
+    "Lampadati": [
+        {
+            "id": "veh-083",
+            "m": "CASCO",
+            "p": "$30.000"
+        },
+        {
+            "id": "veh-084",
+            "m": "CINQUEMILA",
+            "p": "$110.000"
+        },
+        {
+            "id": "veh-085",
+            "m": "CORSITA",
+            "p": "$900.000"
+        },
+        {
+            "id": "veh-086",
+            "m": "KOMODA",
+            "p": "$250.000"
+        },
+        {
+            "id": "veh-087",
+            "m": "TIGON",
+            "p": "$1.400.000"
+        }
+    ],
+    "LCC": [
+        {
+            "id": "veh-088",
+            "m": "AVARUS",
+            "p": "$14.000"
+        },
+        {
+            "id": "veh-089",
+            "m": "HEXER",
+            "p": "$12.000"
+        }
+    ],
+    "Maibatsu": [
+        {
+            "id": "veh-090",
+            "m": "MANCHEZ",
+            "p": "$9.000"
+        },
+        {
+            "id": "veh-091",
+            "m": "MANCHEZ SCOUT",
+            "p": "$12.000"
+        },
+        {
+            "id": "veh-092",
+            "m": "PENUMBRA FF",
+            "p": "$60.000"
+        },
+        {
+            "id": "veh-093",
+            "m": "SANCHEZ LIVERY",
+            "p": "$7.000"
+        }
+    ],
+    "Maxwell": [
+        {
+            "id": "veh-094",
+            "m": "ASBO",
+            "p": "$5.000"
+        }
+    ],
+    "Nagasaki": [
+        {
+            "id": "veh-095",
+            "m": "Carbon Rs",
+            "p": "$20.000"
+        },
+        {
+            "id": "veh-096",
+            "m": "SHINOBI",
+            "p": "$45.000"
+        },
+        {
+            "id": "veh-097",
+            "m": "SHOTARO",
+            "p": "$55.000"
+        },
+        {
+            "id": "veh-098",
+            "m": "Street Blazer",
+            "p": "$20.000"
+        }
+    ],
+    "Obey": [
+        {
+            "id": "veh-099",
+            "m": "10F",
+            "p": "$600.000"
+        },
+        {
+            "id": "veh-100",
+            "m": "8F DRAFTER",
+            "p": "$250.000"
+        },
+        {
+            "id": "veh-101",
+            "m": "9F CABRIO",
+            "p": "$45.000"
+        },
+        {
+            "id": "veh-102",
+            "m": "I-WAGEN",
+            "p": "$95.000"
+        },
+        {
+            "id": "veh-103",
+            "m": "OMNIS",
+            "p": "$135.000"
+        },
+        {
+            "id": "veh-104",
+            "m": "OMNIS E-GT",
+            "p": "$550.000"
+        },
+        {
+            "id": "veh-105",
+            "m": "TAILGETER S",
+            "p": "$90.000"
+        }
+    ],
+    "Ocelot": [
+        {
+            "id": "veh-106",
+            "m": "JUGULAR",
+            "p": "$80.000"
+        },
+        {
+            "id": "veh-107",
+            "m": "LOCUST",
+            "p": "$600.000"
+        },
+        {
+            "id": "veh-108",
+            "m": "PARIAH",
+            "p": "$250.000"
+        },
+        {
+            "id": "veh-109",
+            "m": "VIRTUE",
+            "p": "$2.300.000"
+        },
+        {
+            "id": "veh-110",
+            "m": "XA-21",
+            "p": "$1.800.000"
+        }
+    ],
+    "Overflod": [
+        {
+            "id": "veh-111",
+            "m": "AUTARCH",
+            "p": "$1.400.000"
+        },
+        {
+            "id": "veh-112",
+            "m": "ENTITY MT",
+            "p": "$2.700.000"
+        },
+        {
+            "id": "veh-113",
+            "m": "ENTITY XXR",
+            "p": "$1.900.000"
+        },
+        {
+            "id": "veh-114",
+            "m": "PIPISTRELLO",
+            "p": "$2.500.000"
+        },
+        {
+            "id": "veh-115",
+            "m": "SUZUME",
+            "p": "$3.000.000"
+        },
+        {
+            "id": "veh-116",
+            "m": "TYRANT",
+            "p": "$1.700.000"
+        },
+        {
+            "id": "veh-117",
+            "m": "ZENO",
+            "p": "$1.800.000"
+        }
+    ],
+    "Pegassi": [
+        {
+            "id": "veh-118",
+            "m": "BATI 801",
+            "p": "$17.000"
+        },
+        {
+            "id": "veh-119",
+            "m": "BATI 801RR",
+            "p": "$20.000"
+        },
+        {
+            "id": "veh-120",
+            "m": "FAGGIO CLASSIC",
+            "p": "$2.000"
+        },
+        {
+            "id": "veh-121",
+            "m": "FAGGIO MOD",
+            "p": "$2.500"
+        },
+        {
+            "id": "veh-122",
+            "m": "FAGGIO SPORT",
+            "p": "$5.000"
+        },
+        {
+            "id": "veh-123",
+            "m": "IGNUS",
+            "p": "$3.500.000"
+        },
+        {
+            "id": "veh-124",
+            "m": "OSIRIS",
+            "p": "$1.250.000"
+        },
+        {
+            "id": "veh-125",
+            "m": "REAPER",
+            "p": "$900.000"
+        },
+        {
+            "id": "veh-126",
+            "m": "RUFFIAN",
+            "p": "$10.000"
+        },
+        {
+            "id": "veh-127",
+            "m": "TEMPESTA",
+            "p": "$1.500.000"
+        },
+        {
+            "id": "veh-128",
+            "m": "TEZERACT",
+            "p": "$5.000.000"
+        },
+        {
+            "id": "veh-129",
+            "m": "Torero Xo",
+            "p": "$2.000.000"
+        },
+        {
+            "id": "veh-130",
+            "m": "TOROS",
+            "p": "$550.000"
+        },
+        {
+            "id": "veh-131",
+            "m": "VORTEX",
+            "p": "$20.000"
+        },
+        {
+            "id": "veh-132",
+            "m": "ZENTORNO",
+            "p": "$600.000"
+        },
+        {
+            "id": "veh-133",
+            "m": "ZORUSSO",
+            "p": "$600.000"
+        }
+    ],
+    "Pfister": [
+        {
+            "id": "veh-134",
+            "m": "811",
+            "p": "$1.800.000"
+        },
+        {
+            "id": "veh-135",
+            "m": "ASTRON",
+            "p": "$150.000"
+        },
+        {
+            "id": "veh-136",
+            "m": "COMET",
+            "p": "$100.000"
+        },
+        {
+            "id": "veh-137",
+            "m": "COMET CABRIO S2",
+            "p": "$320.000"
+        },
+        {
+            "id": "veh-138",
+            "m": "COMET S2",
+            "p": "$250.000"
+        },
+        {
+            "id": "veh-139",
+            "m": "GROWLER",
+            "p": "$125.000"
+        },
+        {
+            "id": "veh-140",
+            "m": "NEON",
+            "p": "$350.000"
+        }
+    ],
+    "Principe": [
+        {
+            "id": "veh-141",
+            "m": "DEVASTATE EIGHT",
+            "p": "$5.000.000"
+        },
+        {
+            "id": "veh-142",
+            "m": "Nemesis",
+            "p": "$8.000"
+        }
+    ],
+    "Progen": [
+        {
+            "id": "veh-143",
+            "m": "EMERUS",
+            "p": "$2.500.000"
+        },
+        {
+            "id": "veh-144",
+            "m": "T-20",
+            "p": "$700.000"
+        }
+    ],
+    "Shitzu": [
+        {
+            "id": "veh-145",
+            "m": "DEFILER",
+            "p": "$25.000"
+        },
+        {
+            "id": "veh-146",
+            "m": "HAKUCHOU",
+            "p": "$27.000"
+        },
+        {
+            "id": "veh-147",
+            "m": "HAKUCHOU DRUG",
+            "p": "$35.000"
+        }
+    ],
+    "Truffade": [
+        {
+            "id": "veh-148",
+            "m": "ADDER",
+            "p": "$2.000.000"
+        },
+        {
+            "id": "veh-149",
+            "m": "NERO",
+            "p": "$2.250.000"
+        },
+        {
+            "id": "veh-150",
+            "m": "THRAX",
+            "p": "$5.000.000"
+        }
+    ],
+    "Vapid": [
+        {
+            "id": "veh-151",
+            "m": "ALEUTIAN",
+            "p": "$110.000"
+        },
+        {
+            "id": "veh-152",
+            "m": "CARACARA 4X4",
+            "p": "$150.000"
+        },
+        {
+            "id": "veh-153",
+            "m": "DOMINATOR ASP",
+            "p": "$75.000"
+        },
+        {
+            "id": "veh-154",
+            "m": "Dominator Gt",
+            "p": "$70.000"
+        },
+        {
+            "id": "veh-155",
+            "m": "Dominator Gtx",
+            "p": "$130.000"
+        },
+        {
+            "id": "veh-156",
+            "m": "Flash Gt",
+            "p": "$70.000"
+        },
+        {
+            "id": "veh-157",
+            "m": "PEYOTE CUSTOM",
+            "p": "$30.000"
+        },
+        {
+            "id": "veh-158",
+            "m": "Retinue",
+            "p": "$17.000"
+        }
+    ],
+    "Vulcar": [
+        {
+            "id": "veh-159",
+            "m": "Warrener",
+            "p": "$20.000"
+        }
+    ],
+    "Vysser": [
+        {
+            "id": "veh-160",
+            "m": "NEO",
+            "p": "$1.000.000"
+        }
+    ],
+    "Weeny": [
+        {
+            "id": "veh-161",
+            "m": "Issi",
+            "p": "$20.000"
+        },
+        {
+            "id": "veh-162",
+            "m": "Issi Classic",
+            "p": "$10.000"
+        }
+    ],
+    "Western": [
+        {
+            "id": "veh-163",
+            "m": "DAEMON",
+            "p": "$13.000"
+        },
+        {
+            "id": "veh-164",
+            "m": "NIGTHBLADE",
+            "p": "$20.000"
+        },
+        {
+            "id": "veh-165",
+            "m": "ZOMBIE BOBBER",
+            "p": "$17.000"
+        },
+        {
+            "id": "veh-166",
+            "m": "ZOMBIE CHOPPER",
+            "p": "$15.000"
+        }
+    ],
+    "Willard": [
+        {
+            "id": "veh-167",
+            "m": "Eudora",
+            "p": "$90.000"
+        }
+    ],
+    "Übermacht": [
+        {
+            "id": "veh-168",
+            "m": "CYPHER",
+            "p": "$180.000"
+        },
+        {
+            "id": "veh-169",
+            "m": "NIOBE",
+            "p": "$1.000.000"
+        },
+        {
+            "id": "veh-170",
+            "m": "Rebla Gts",
+            "p": "$200.000"
+        },
+        {
+            "id": "veh-171",
+            "m": "RHINEHART",
+            "p": "$85.000"
+        },
+        {
+            "id": "veh-172",
+            "m": "SC1",
+            "p": "$500.000"
+        },
+        {
+            "id": "veh-173",
+            "m": "Sentinel Classic",
+            "p": "$85.000"
+        },
+        {
+            "id": "veh-174",
+            "m": "Sentinel Gts",
+            "p": "$100.000"
+        },
+        {
+            "id": "veh-175",
+            "m": "Sentinel Xs",
+            "p": "$15.000"
         }
     ]
 };
@@ -1392,7 +1460,7 @@ async function submitVehicleOrder() {
                 { name: '📞 Telefono IC', value: clean(phone), inline: true },
                 { name: '💬 Discord da contattare', value: clean(discordNickname), inline: false },
                 { name: '🚗 Veicolo', value: clean(car.m), inline: true },
-                { name: '📂 Categoria', value: clean(brand), inline: true },
+                { name: '🏷️ Marchio', value: clean(brand), inline: true },
                 { name: '💵 Prezzo di listino', value: clean(car.p), inline: true },
                 { name: '📝 Note', value: clean(notes || 'Nessuna nota'), inline: false },
                 { name: '📌 Azione concessionario', value: 'Ordinare il veicolo e contattare manualmente il cliente su Discord quando sarà disponibile per il ritiro.', inline: false }
@@ -1450,7 +1518,7 @@ function showBrands() {
     grid.innerHTML = ''; backBtn.style.display = 'none'; searchInput.value = '';
     Object.keys(carData).sort().forEach(brand => {
         const card = document.createElement('div'); card.className = 'card';
-        card.innerHTML = `<span>CATEGORIA</span><h3>${brand}</h3><p style="font-size:0.55rem; color:var(--gold); margin-top:5px; font-weight:700;">${carData[brand].length} VEICOLI</p>`;
+        card.innerHTML = `<span>MANIFATTURA</span><h3>${brand}</h3><p style="font-size:0.55rem; color:var(--gold); margin-top:5px; font-weight:700;">${carData[brand].length} MODELLI</p>`;
         card.onclick = () => showCars(brand);
         grid.appendChild(card);
     });
