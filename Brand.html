@@ -2,7 +2,8 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Charming Car</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cars Around The World</title>
 
 <style>
 body {
@@ -17,6 +18,9 @@ header {
   background: #000;
   padding: 20px;
   border-bottom: 2px solid #444;
+  position: sticky;
+  top: 0;
+  z-index: 20;
 }
 
 button {
@@ -39,17 +43,63 @@ button:hover {
 
 .car {
   display: inline-block;
+  vertical-align: top;
   width: 240px;
   margin: 12px;
   padding: 15px;
   background: #222;
   border-radius: 10px;
+  border: 1px solid #2f2f2f;
+}
+
+.car:hover {
+  border-color: #666;
+  transform: translateY(-2px);
 }
 
 .car img {
   width: 100%;
   border-radius: 8px;
   margin-top: 10px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 8px 0 4px;
+}
+
+.type {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-top: 4px;
+  border-radius: 999px;
+  background: #333;
+  color: #ddd;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.subcategory {
+  min-height: 16px;
+  margin-top: 7px;
+  color: #aaa;
+  font-size: 11px;
+}
+
+.empty {
+  padding: 40px 15px;
+  color: #aaa;
+}
+
+@media (max-width: 600px) {
+  .container { padding: 14px; }
+  .car {
+    width: calc(50% - 36px);
+    min-width: 135px;
+    margin: 6px;
+    padding: 10px;
+  }
 }
 </style>
 </head>
@@ -67,64 +117,1038 @@ button:hover {
 
 <script>
 const cars = {
-  Albany: ["Buccaneer","Emperor","Hermes","Manana","Primo"],
-  Annis: ["Elegy RH8","Elegy Retro","Savestra"],
-  Benefactor: ["Schafter","Stirling GT","Feltzer","Dubsta"],
-  BF: ["Bifta","Injection"],
-  Bravado: ["Banshee","Buffalo","Gauntlet"],
-  Canis: ["Bodhi","Freecrawler"],
-  Declasse: ["Sabre Turbo","Voodoo","Impaler"],
-  Dewbauchee: ["Rapid GT","Specter","Massacro"],
-  Dinka: ["Blista","Jester","Sugoi"],
-  Enus: ["Cognoscenti","Paragon R","Windsor"],
-  Gallivanter: ["Baller"],
-  Grotti: ["Cheetah","Turismo R","Furia","Itali RSX"],
-  Imponte: ["Phoenix","Duke O'Death"],
-  Invetero: ["Coquette","Coquette D10"],
-  Karin: ["Futo","Sultan","BeeJay XL"],
-  Lampadati: ["Casco","Michelli GT"],
-  Maibatsu: ["Penumbra"],
-  Obey: ["9F","Tailgater","Omnis"],
-  Ocelot: ["Jackal","Pariah","XA-21"],
-  Overflod: ["Entity XF","Autarch"],
-  Pegassi: ["Infernus","Zentorno","Osiris","Tempesta"],
-  Pfister: ["Comet","Neon","Growler"],
-  Progen: ["T20","Emerus"],
-  Truffade: ["Adder","Thrax"],
-  Übermacht: ["Sentinel","Rebla GTS","Zion"],
-  Vapid: ["Dominator","Flash GT","Ellie"],
-  Vulcar: ["Warrener"],
-  Weeny: ["Issi"],
-  Western: ["Daemon","Zombie"]
+  "Albany": [
+    {
+      "m": "BUCCANER",
+      "p": "$30.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Cavalcade Xl",
+      "p": "$85.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "V-STR",
+      "p": "$120.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Annis": [
+    {
+      "m": "300R",
+      "p": "$180.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Elegy RH8",
+      "p": "VEICOLO INIZIALE",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "EUROS",
+      "p": "$60.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "HARDY",
+      "p": "$45.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "REMUS",
+      "p": "$30.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "REMUS",
+      "p": "$50.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ZR-350",
+      "p": "$300.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ZR350",
+      "p": "$95.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Benefactor": [
+    {
+      "m": "KRIEGER",
+      "p": "$2.700.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Panto",
+      "p": "$5.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SCHLAGEN",
+      "p": "$1.400.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SCHWATZER",
+      "p": "$50.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SM-722",
+      "p": "$1.500.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "BF": [
+    {
+      "m": "Bf400",
+      "p": "$10.000",
+      "tipo": "MOTO",
+      "categoria": "ENDURO / MOTARD / FUORISTRADA"
+    },
+    {
+      "m": "CLUB",
+      "p": "$20.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Bravado": [
+    {
+      "m": "Banshee 900R",
+      "p": "$60.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Banshee GTS",
+      "p": "$1.400.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "BISON",
+      "p": "$25.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Buffalo S",
+      "p": "$40.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "BUFFALO STX",
+      "p": "$80.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Gauntlet",
+      "p": "$40.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Gauntlet Hellfire",
+      "p": "$65.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Canis": [
+    {
+      "m": "Terminus",
+      "p": "$95.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Cheval": [
+    {
+      "m": "TAIPAN",
+      "p": "$1.200.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Coil": [
+    {
+      "m": "CYCLONE",
+      "p": "$1.100.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "RAIDEN",
+      "p": "$140.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Declasse": [
+    {
+      "m": "Tulip",
+      "p": "$15.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "VIGERO",
+      "p": "$20.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Vigero Zx",
+      "p": "$175.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Dewbauchee": [
+    {
+      "m": "Champion",
+      "p": "$350.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "RAPID GT",
+      "p": "$125.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "VAGNER",
+      "p": "$900.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Dinka": [
+    {
+      "m": "AKUMA",
+      "p": "$13.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA STRADA"
+    },
+    {
+      "m": "Blista Kanjo",
+      "p": "$25.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "DOUBLE-T",
+      "p": "$15.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA STRADA"
+    },
+    {
+      "m": "ENDURO",
+      "p": "$8.000",
+      "tipo": "MOTO",
+      "categoria": "ENDURO / MOTARD / FUORISTRADA"
+    },
+    {
+      "m": "Jester Classic",
+      "p": "$160.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "JESTER RR",
+      "p": "$85.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "KANJO SJ",
+      "p": "$20.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "POSTLUDE",
+      "p": "$30.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SUGOI",
+      "p": "$110.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Emperor": [
+    {
+      "m": "VECTRE",
+      "p": "$85.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Enus": [
+    {
+      "m": "Cogniscenti",
+      "p": "$35.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "DEITY",
+      "p": "$300.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Jubilee",
+      "p": "$1.500.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Paragon R",
+      "p": "$800.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "PARAGON S",
+      "p": "$1.400.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "STAFFORD",
+      "p": "$150.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Super Diamond",
+      "p": "$250.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Windsor",
+      "p": "$350.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Gallivanter": [
+    {
+      "m": "BALLER",
+      "p": "$125.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Baller St-D",
+      "p": "$190.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Grotti": [
+    {
+      "m": "Bestia Gts",
+      "p": "$550.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Brioso 300",
+      "p": "$10.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Cheetah Classic",
+      "p": "$230.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "FURIA",
+      "p": "$800.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ITALY GTO",
+      "p": "$1.650.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ITALY GTO STINGER",
+      "p": "$2.500.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ITALY RSX",
+      "p": "$2.500.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "TURISMO CLASSIC",
+      "p": "$2.000.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "TURISMO OMAGGIO",
+      "p": "$2.700.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "TURISMO R",
+      "p": "$300.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "VISIONE",
+      "p": "$1.800.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "X80 PROTO",
+      "p": "$3.000.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Hijak": [
+    {
+      "m": "Khamelion",
+      "p": "$300.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Imponte": [
+    {
+      "m": "DUKES",
+      "p": "$20.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "NIGTHSHADE",
+      "p": "$45.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Invetero": [
+    {
+      "m": "Coquette Classic",
+      "p": "$250.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "COQUETTE D10",
+      "p": "$700.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Karin": [
+    {
+      "m": "190Z",
+      "p": "$35.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ASTEROPE GZ",
+      "p": "$15.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "CALICO GTF",
+      "p": "$30.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "EVERON RS",
+      "p": "$167.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "FUTO",
+      "p": "$25.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "KURUMA",
+      "p": "$35.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SULTAN",
+      "p": "$65.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SULTAN RS CLASSIC",
+      "p": "$75.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SULTAN RS CLASSIC 5 PORTE",
+      "p": "$135.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "VIVANITE",
+      "p": "$55.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Lampadati": [
+    {
+      "m": "CASCO",
+      "p": "$30.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "CINQUEMILA",
+      "p": "$110.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "CORSITA",
+      "p": "$900.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "KOMODA",
+      "p": "$250.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "TIGON",
+      "p": "$1.400.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "LCC": [
+    {
+      "m": "AVARUS",
+      "p": "$14.000",
+      "tipo": "MOTO",
+      "categoria": "CHOPPER / BIKER GANG"
+    },
+    {
+      "m": "HEXER",
+      "p": "$12.000",
+      "tipo": "MOTO",
+      "categoria": "CHOPPER / BIKER GANG"
+    }
+  ],
+  "Maibatsu": [
+    {
+      "m": "MANCHEZ",
+      "p": "$9.000",
+      "tipo": "MOTO",
+      "categoria": "ENDURO / MOTARD / FUORISTRADA"
+    },
+    {
+      "m": "MANCHEZ SCOUT",
+      "p": "$12.000",
+      "tipo": "MOTO",
+      "categoria": "ENDURO / MOTARD / FUORISTRADA"
+    },
+    {
+      "m": "PENUMBRA FF",
+      "p": "$60.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SANCHEZ LIVERY",
+      "p": "$7.000",
+      "tipo": "MOTO",
+      "categoria": "ENDURO / MOTARD / FUORISTRADA"
+    }
+  ],
+  "Maxwell": [
+    {
+      "m": "ASBO",
+      "p": "$5.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Nagasaki": [
+    {
+      "m": "Carbon Rs",
+      "p": "$20.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA STRADA"
+    },
+    {
+      "m": "SHINOBI",
+      "p": "$45.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO SPORTIVE/RACING"
+    },
+    {
+      "m": "SHOTARO",
+      "p": "$55.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO SPORTIVE/RACING"
+    },
+    {
+      "m": "Street Blazer",
+      "p": "$20.000",
+      "tipo": "MOTO",
+      "categoria": "ENDURO / MOTARD / FUORISTRADA"
+    }
+  ],
+  "Obey": [
+    {
+      "m": "10F",
+      "p": "$600.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "8F DRAFTER",
+      "p": "$250.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "9F CABRIO",
+      "p": "$45.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "I-WAGEN",
+      "p": "$95.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "OMNIS",
+      "p": "$135.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "OMNIS E-GT",
+      "p": "$550.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "TAILGETER S",
+      "p": "$90.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Ocelot": [
+    {
+      "m": "JUGULAR",
+      "p": "$80.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "LOCUST",
+      "p": "$600.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "PARIAH",
+      "p": "$250.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "VIRTUE",
+      "p": "$2.300.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "XA-21",
+      "p": "$1.800.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Overflod": [
+    {
+      "m": "AUTARCH",
+      "p": "$1.400.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ENTITY MT",
+      "p": "$2.700.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ENTITY XXR",
+      "p": "$1.900.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "PIPISTRELLO",
+      "p": "$2.500.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SUZUME",
+      "p": "$3.000.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "TYRANT",
+      "p": "$1.700.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ZENO",
+      "p": "$1.800.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Pegassi": [
+    {
+      "m": "BATI 801",
+      "p": "$17.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA STRADA"
+    },
+    {
+      "m": "BATI 801RR",
+      "p": "$20.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA STRADA"
+    },
+    {
+      "m": "FAGGIO CLASSIC",
+      "p": "$2.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA CITTÀ/SCOOTER"
+    },
+    {
+      "m": "FAGGIO MOD",
+      "p": "$2.500",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA CITTÀ/SCOOTER"
+    },
+    {
+      "m": "FAGGIO SPORT",
+      "p": "$5.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA CITTÀ/SCOOTER"
+    },
+    {
+      "m": "IGNUS",
+      "p": "$3.500.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "OSIRIS",
+      "p": "$1.250.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "REAPER",
+      "p": "$900.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "RUFFIAN",
+      "p": "$10.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA STRADA"
+    },
+    {
+      "m": "TEMPESTA",
+      "p": "$1.500.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "TEZERACT",
+      "p": "$5.000.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Torero Xo",
+      "p": "$2.000.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "TOROS",
+      "p": "$550.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "VORTEX",
+      "p": "$20.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO SPORTIVE/RACING"
+    },
+    {
+      "m": "ZENTORNO",
+      "p": "$600.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ZORUSSO",
+      "p": "$600.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Pfister": [
+    {
+      "m": "811",
+      "p": "$1.800.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "ASTRON",
+      "p": "$150.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "COMET",
+      "p": "$100.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "COMET CABRIO S2",
+      "p": "$320.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "COMET S2",
+      "p": "$250.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "GROWLER",
+      "p": "$125.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "NEON",
+      "p": "$350.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Principe": [
+    {
+      "m": "DEVASTATE EIGHT",
+      "p": "$5.000.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Nemesis",
+      "p": "$8.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO DA CITTÀ/SCOOTER"
+    }
+  ],
+  "Progen": [
+    {
+      "m": "EMERUS",
+      "p": "$2.500.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "T-20",
+      "p": "$700.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Shitzu": [
+    {
+      "m": "DEFILER",
+      "p": "$25.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO SPORTIVE/RACING"
+    },
+    {
+      "m": "HAKUCHOU",
+      "p": "$27.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO SPORTIVE/RACING"
+    },
+    {
+      "m": "HAKUCHOU DRUG",
+      "p": "$35.000",
+      "tipo": "MOTO",
+      "categoria": "MOTO SPORTIVE/RACING"
+    }
+  ],
+  "Truffade": [
+    {
+      "m": "ADDER",
+      "p": "$2.000.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "NERO",
+      "p": "$2.250.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "THRAX",
+      "p": "$5.000.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Vapid": [
+    {
+      "m": "ALEUTIAN",
+      "p": "$110.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "CARACARA 4X4",
+      "p": "$150.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "DOMINATOR ASP",
+      "p": "$75.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Dominator Gt",
+      "p": "$70.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Dominator Gtx",
+      "p": "$130.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Flash Gt",
+      "p": "$70.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "PEYOTE CUSTOM",
+      "p": "$30.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Retinue",
+      "p": "$17.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Vulcar": [
+    {
+      "m": "Warrener",
+      "p": "$20.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Vysser": [
+    {
+      "m": "NEO",
+      "p": "$1.000.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Weeny": [
+    {
+      "m": "Issi",
+      "p": "$20.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Issi Classic",
+      "p": "$10.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Western": [
+    {
+      "m": "DAEMON",
+      "p": "$13.000",
+      "tipo": "MOTO",
+      "categoria": "CHOPPER / BIKER GANG"
+    },
+    {
+      "m": "NIGTHBLADE",
+      "p": "$20.000",
+      "tipo": "MOTO",
+      "categoria": "CHOPPER / BIKER GANG"
+    },
+    {
+      "m": "ZOMBIE BOBBER",
+      "p": "$17.000",
+      "tipo": "MOTO",
+      "categoria": "CHOPPER / BIKER GANG"
+    },
+    {
+      "m": "ZOMBIE CHOPPER",
+      "p": "$15.000",
+      "tipo": "MOTO",
+      "categoria": "CHOPPER / BIKER GANG"
+    }
+  ],
+  "Willard": [
+    {
+      "m": "Eudora",
+      "p": "$90.000",
+      "tipo": "AUTO"
+    }
+  ],
+  "Übermacht": [
+    {
+      "m": "CYPHER",
+      "p": "$180.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "NIOBE",
+      "p": "$1.000.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Rebla Gts",
+      "p": "$200.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "RHINEHART",
+      "p": "$85.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "SC1",
+      "p": "$500.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Sentinel Classic",
+      "p": "$85.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Sentinel Gts",
+      "p": "$100.000",
+      "tipo": "AUTO"
+    },
+    {
+      "m": "Sentinel Xs",
+      "p": "$15.000",
+      "tipo": "AUTO"
+    }
+  ]
 };
 
 const params = new URLSearchParams(window.location.search);
-const brand = params.get("brand");
+let brand = params.get("brand") || "";
+
+// Compatibilità con eventuali link vecchi che usano "Ubermacht".
+if (brand === "Ubermacht" || brand === "UBERMACHT") brand = "Übermacht";
 
 document.getElementById("brandTitle").textContent =
-  "Cars Around The World – " + brand;
+  brand ? "Cars Around The World – " + brand : "Cars Around The World";
 
 const container = document.getElementById("cars");
 
 if (cars[brand]) {
-  cars[brand].forEach(model => {
+  cars[brand].forEach(vehicle => {
     const div = document.createElement("div");
     div.className = "car";
 
     const title = document.createElement("h3");
-    title.textContent = model;
+    title.textContent = vehicle.m;
+
+    const price = document.createElement("div");
+    price.className = "price";
+    price.textContent = vehicle.p;
+
+    const type = document.createElement("div");
+    type.className = "type";
+    type.textContent = vehicle.tipo;
+
+    const subcategory = document.createElement("div");
+    subcategory.className = "subcategory";
+    subcategory.textContent = vehicle.categoria || "";
 
     const img = document.createElement("img");
     img.src =
       "https://via.placeholder.com/400x200?text=" +
-      encodeURIComponent(model);
+      encodeURIComponent(brand + " " + vehicle.m);
+    img.alt = brand + " " + vehicle.m;
 
     div.appendChild(title);
+    div.appendChild(price);
+    div.appendChild(type);
+    div.appendChild(subcategory);
     div.appendChild(img);
     container.appendChild(div);
   });
 } else {
-  container.textContent = "Nessun veicolo trovato.";
+  container.innerHTML =
+    '<div class="empty">Nessun veicolo trovato per questo marchio.</div>';
 }
 </script>
 
